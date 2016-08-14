@@ -1,0 +1,115 @@
+; vim:ft=dosini
+;
+; lemonbuddy configuration file
+
+[settings]
+; Limit the amount of events sent to lemonbar within a set timeframe:
+; - "Allow <throttle_limit> updates within <throttle_ms> of time"
+; Default values:
+;throttle_limit = 5
+;throttle_ms = 50
+
+[bar/master]
+monitor = eDP-1
+bottom = true
+dock = false
+width = 100%
+height = 48
+
+background = #22ffffff
+foreground = #fff
+lineheight = 4
+
+spacing = 1
+
+padding_left = 1
+padding_right = 1
+module_margin_left = 0
+module_margin_right = 0
+
+font-0 = InconsolataforPowerline:size=12;0
+font-1 = FontAwesome:size=10;0
+
+modules-left = bspwm settings
+modules-right = wireless-network battery volume ram date time
+
+[module/bspwm]
+type = internal/bspwm
+workspace_icon-1 = 1
+workspace_icon-2 = 2
+workspace_icon-3 = 3
+workspace_icon-4 = 4
+
+label-active = 
+label-active-padding = 1
+
+label-urgent = 
+label-urgent-background = #8800ad9c
+label-urgent-padding = 1
+
+label-occupied = 
+label-occupied-padding = 1
+label-empty = 
+label-empty-padding = 1
+
+[module/settings]
+type = custom/text
+content = ""
+click-left = cinnamon-settings
+
+content-padding = 1
+
+[module/wireless-network]
+type = internal/network
+interface = wlp2s0
+
+label-connected = " %essid%"
+format-connected-padding = 2
+
+label-disconnected = " No Wifi"
+format-disconnected-background = #88f22c40
+format-disconnected-padding = 2
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+
+label-charging = " %percentage%"
+format-charging-padding = 2
+
+label-discharging = " %percentage%"
+format-discharging-background = #88407ee7
+format-discharging-padding = 2
+
+[module/volume]
+type = internal/volume
+
+label-volume = " %percentage%"
+format-volume-background = #885ab738
+format-volume-padding = 2
+
+label-muted = " Mute"
+format-muted-padding = 2
+
+[module/ram]
+type = internal/memory
+interval = 30
+label = " %gb_used%"
+
+format-padding = 2
+
+[module/date]
+type = internal/date
+interval = 360
+date = " %b %-d"
+
+;click-left = gsimplecal
+
+format-padding = 2
+
+[module/time]
+type = internal/date
+date = " %-I:%M %p"
+
+format-padding = 2

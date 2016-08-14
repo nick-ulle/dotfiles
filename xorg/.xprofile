@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# .xprofile
+#
+# This file is executed on DM login, regardless of the selected session.
+
+
+# Most DMs don't run TTY login scripts by default, so do that here.
+[[ -r ~/.bash_profile ]] && source ~/.bash_profile
+
+
+# Keyboard Settings
+# =================
+# Map Alt_R to Compose and Capslock to F32.
+setxkbmap -option 'compose:ralt'
+xmodmap -e "remove Lock = Caps_Lock"
+xmodmap -e "keysym Caps_Lock = F32"
+
+
+# Display Settings
+# ================
+# Fix the monitor's scaling mode in case we use a low resolution.
+#xrandr --output LVDS --set "scaling mode" "Full aspect"
+
+# Add custom resolution 2400x1800 to laptop display.
+xrandr --newmode "2400x1800" \
+  368.50   2400 2592 2848 3296   1800 1803 1807 1865   -hsync +vsync
+xrandr --addmode eDP-1 2400x1800

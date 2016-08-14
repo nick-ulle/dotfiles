@@ -1,0 +1,124 @@
+
+# Restart sxhkd.
+super + BackSpace
+	pkill -USR1 -x sxhkd
+
+# --- Desktops {{{
+
+# Focus desktop or send to desktop.
+super + {_,shift + }{1-9,0}
+	bspc {desktop --focus,node -d} '^{1-9,10}'
+
+# --- }}}
+
+# --- Windows {{{
+
+# Focus windows.
+super + {h,j,k,l}
+	bspc node --focus {west,south,north,east}
+
+# Reorient windows.
+super + {H,L}
+  bspc node {west,east} --presel-dir south \
+  && bspc node --to-node last.'!automatic'
+
+super + {J,K}
+  bspc node {south,north} --presel-dir east \
+  && bspc node --to-node last.'!automatic'
+
+# Swap windows.
+super + ctrl + {h,j,k,l}
+  bspc node --swap {west,south,north,east}
+
+# Close or kill windows.
+super + {_,shift + }q
+	bspc node --{close,kill}
+
+# Monocle on current window.
+super + space
+	bspc desktop --layout next
+
+# Fullscreen or floating on current window.
+super + {shift + space,Return}
+	bspc node -t '~'{fullscreen,floating}
+
+# Sticky on current window.
+super + shift + Return
+	bspc node -g sticky
+
+# Focus last window.
+super + Tab
+	bspc node --focus last
+
+
+# Resize Mode
+# -----------
+super + r : {h,l}
+  INC={-10,+10}; bspc node @east -r $INC || bspc node @west -r $INC
+
+super + r : {j,k}
+  INC={+10,-10}; bspc node @north -r $INC || bspc node @south -r $INC
+
+
+# Preselect Mode
+# --------------
+#super + period ; {h,j,k,l}
+#	bspc node --presel-dir {west,south,north,east}
+#
+## Preselect ratio.
+#super + period ; {1-9}
+#	bspc node --presel-ratio 0.{1-9}
+#
+## Cancel preselection.
+#super + period ; space
+#	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+
+# Mouse
+# -----
+# Focus window on click.
+~button1
+	bspc pointer --grab focus
+
+# Move or resize window on drag.
+super + button{1-3}
+	; bspc pointer --grab {move,resize_side,resize_corner}
+super + @button{1-3}
+	bspc pointer --ungrab
+
+# --- }}}
+
+# --- Session {{{
+
+super {_,shift + }Escape
+  cinnamon-{screensaver-command --lock,session-quit}
+
+XF86Sleep
+  cinnamon-screensaver-command --lock && systemctl suspend
+
+XF86PowerOff
+  cinnamon-session-quit --power-off
+
+XF86Audio{Mute,LowerVolume,RaiseVolume}
+  amixer set Master {toggle,4%-,4%+}
+
+# --- }}}
+
+# --- Applications {{{
+
+# Also looks good with -sb #df5320.
+super + d
+  dmenu_run -b -x 300 -w 1000 -h 48 -fn InconsolataforPowerline-12 \
+  -nf "#fff" -sf "#fff" -nb "#1b1918" -sb "#6666ea" -p ">_ " \
+  -o 1.0 #-dim 0.8 -dc "#1b1918"
+
+super + c
+  st -e tmux new-session
+
+super + {i,I}
+  {firefox,chromium}
+
+super + f
+  nemo --no-desktop
+
+# --- }}}
