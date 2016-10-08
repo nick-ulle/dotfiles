@@ -1,0 +1,22 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Nick Ulle
+	email = nick.ulle@gmail.com
+[core]
+	editor = nvim
+
+[alias]
+	stage = add
+	unstage = reset HEAD --
+	ls = log --oneline --decorate --graph -5
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+[merge]
+  tool = vimdiff
+[mergetool]
+  prompt = true
+[mergetool "vimdiff"]
+  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
