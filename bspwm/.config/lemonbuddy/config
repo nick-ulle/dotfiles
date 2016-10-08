@@ -75,6 +75,9 @@ type = internal/battery
 battery = BAT0
 adapter = AC0
 
+label-full = " %percentage%"
+format-full-padding = 2
+
 label-charging = " %percentage%"
 format-charging-padding = 2
 
