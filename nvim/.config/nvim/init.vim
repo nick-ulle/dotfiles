@@ -353,7 +353,7 @@ set laststatus=2    " Always show status line.
 syntax on                           " Enable syntax highlighting.
 
 if $TERM ==? "st-256color" || $TERM ==? "tmux"
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1   " Enable 24-bit true color.
+  set termguicolors                   " Enable 24-bit true color.
   colorscheme base16-solarized-light  " Set the color scheme.
 else
   colorscheme base16-atelier-forest
