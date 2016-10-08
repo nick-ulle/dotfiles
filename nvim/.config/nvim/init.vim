@@ -26,6 +26,7 @@ Plug 'andrewmacp/llvm.vim'
 "Plug 'vim-pandoc/vim-pandoc'
 "Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'jalvesaq/Nvim-R'
+Plug 'peterhoeg/vim-qml'
 
 " Personal
 "Plugin 'nick-ulle/REPLize'
