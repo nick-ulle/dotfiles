@@ -215,6 +215,12 @@ augroup C
   autocmd FileType c,cpp :setlocal comments-=:// comments+=f://
 augroup END
 
+augroup git
+  autocmd!
+  " Wrap commit messages at 72 characters.
+  autocmd FileType gitcommit :setlocal textwidth=72 colorcolumn=73
+augroup END
+
 augroup Python
   autocmd!
   " Indent 4 spaces, as per PEP 8.
