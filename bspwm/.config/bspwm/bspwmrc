@@ -1,10 +1,9 @@
 #! /bin/sh
 
-lemonbuddy_terminate noconfirm
 compton -b
+$HOME/.config/lemonbuddy/launch.sh
 
 sxhkd -f 50 &
-lemonbuddy_wrapper master &
 nemo --no-default-window --no-desktop &
 
 # --- Aesthetics {{{
