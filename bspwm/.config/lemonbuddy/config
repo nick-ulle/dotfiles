@@ -22,10 +22,10 @@ lineheight = 4
 
 spacing = 1
 
-padding_left = 1
-padding_right = 1
-module_margin_left = 0
-module_margin_right = 0
+padding-left = 1
+padding-right = 1
+module-margin-left = 0
+module-margin-right = 0
 
 font-0 = InconsolataforPowerline:size=12;0
 font-1 = FontAwesome:size=10;0
@@ -33,12 +33,15 @@ font-1 = FontAwesome:size=10;0
 modules-left = bspwm settings
 modules-right = wireless-network battery volume ram date time
 
+tray-position = right
+wm-restack = bspwm
+
 [module/bspwm]
 type = internal/bspwm
-workspace_icon-1 = 1
-workspace_icon-2 = 2
-workspace_icon-3 = 3
-workspace_icon-4 = 4
+workspace-icon-1 = 1
+workspace-icon-2 = 2
+workspace-icon-3 = 3
+workspace-icon-4 = 4
 
 label-active = 
 label-active-padding = 1
