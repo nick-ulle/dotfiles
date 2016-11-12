@@ -3,7 +3,7 @@
 compton -b
 $HOME/.config/lemonbuddy/launch.sh
 
-sxhkd -f 50 &
+sxhkd & #-f 50 &
 nemo --no-default-window --no-desktop &
 
 # --- Aesthetics {{{
