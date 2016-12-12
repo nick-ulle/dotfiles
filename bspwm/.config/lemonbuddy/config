@@ -30,7 +30,7 @@ module-margin-right = 0
 font-0 = InconsolataforPowerline:size=12;0
 font-1 = FontAwesome:size=10;0
 
-modules-left = bspwm settings
+modules-left = bspwm terminal settings
 modules-right = wireless-network battery volume ram date time
 
 tray-position = right
@@ -55,10 +55,17 @@ label-occupied-padding = 1
 label-empty = 
 label-empty-padding = 1
 
+[module/terminal]
+type = custom/text
+content = ""
+click-left = st -e tmux new-session &
+
+content-padding = 1
+
 [module/settings]
 type = custom/text
 content = ""
-click-left = cinnamon-settings
+click-left = cinnamon-settings &
 
 content-padding = 1
 
