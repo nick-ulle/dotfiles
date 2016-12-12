@@ -33,7 +33,7 @@ PATH="${HOME}/garden/bin:${PATH}"
 PATH="${PATH}:$(ruby -rubygems -e "puts Gem.user_dir")/bin"
 
 # Add TeXLive to the path.
-PATH="${PATH}:/usr/local/texlive/2015/bin/x86_64-linux"
+PATH="${PATH}:/usr/local/texlive/2016/bin/x86_64-linux"
 
 export PATH
 
