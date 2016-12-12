@@ -35,7 +35,7 @@ alias .library='cd ${HOME}/archive/library'
 alias .market='cd ${HOME}/market'
 alias .research='cd ${HOME}/workshop/research'
 alias .teach='cd ${HOME}/university/teach'
-alias .work='cd ${HOME}/workshop/dsi'
+alias .work='cd ${HOME}/workshop'
 
 alias .todo='nvim ~/TODO.md'
 
