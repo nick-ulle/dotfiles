@@ -112,8 +112,8 @@ super + d
   -nf "#fff" -sf "#fff" -nb "#1b1918" -sb "#6666ea" -p ">_ " \
   -o 1.0 #-dim 0.8 -dc "#1b1918"
 
-super + c
-  st -e tmux new-session
+super + {c,C}
+  st{_, -f 'Hack:pixelsize=50'} -e tmux new-session
 
 super + {i,I}
   {firefox,chromium}
