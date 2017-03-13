@@ -6,6 +6,8 @@
 # Return if not running interactively.
 [[ $- != *i* ]] && return
 
+# Set up Rust sources for racer.
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # Aesthetics
 # ==========

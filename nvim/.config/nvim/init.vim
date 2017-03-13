@@ -13,6 +13,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-easy-align'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'PeterRincker/vim-argumentative'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Color Schemes
 Plug 'chriskempson/base16-vim'
@@ -24,9 +26,12 @@ Plug 'chriskempson/base16-vim'
 "Plugin 'JuliaLang/julia-vim'
 Plug 'andrewmacp/llvm.vim'
 "Plug 'vim-pandoc/vim-pandoc'
-"Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'jalvesaq/Nvim-R'
 Plug 'peterhoeg/vim-qml'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'zchee/deoplete-jedi'
 
 " Personal
 "Plugin 'nick-ulle/REPLize'
@@ -61,11 +66,12 @@ set hlsearch    " Highlight search results.
 
 " -----}}}
 " Plugin Settings -----{{{1
-"
+
 let g:markdown_fenced_languages = [
-  \ 'html', 'python', 'bash=sh', 'r', 'llvm', 'cpp'
+  \ 'html', 'python', 'bash=sh', 'r', 'llvm', 'c', 'cpp', 'ocaml'
   \ ]
 
+" airline -----{{{2
 " Enable airline special characters.
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16'
@@ -75,43 +81,53 @@ let g:airline#extensions#bufferline#enabled = 0 " Disable bufferline support.
 let g:airline#extensions#syntastic#enabled = 0  " Disable syntastic support.
 let g:airline#extensions#tagbar#enabled = 0     " Disable tagbar support.
 let g:airline#extensions#csv#enabled = 0
+" -----}}}
 
-" vim-pandoc
-" ==========
-let g:pandoc#modules#disabled = ["folding", "toc", "chdir", "keyboard"]
+" vim-pandoc -----{{{2
+"let g:pandoc#modules#disabled = ['folding', 'toc', 'chdir', 'keyboard']
+"let g:pandoc#formatting#mode = 'h'                  " Use hard wrapping.
 
-let g:pandoc#syntax#conceal#use = 0     " Disable conceal.
-let g:pandoc#formatting#mode = "h"     " Use hard wrapping.
+let g:pandoc#syntax#style#use_definition_lists = 0  " Don't use def lists.
+let g:pandoc#syntax#codeblocks#embeds#langs = [
+  \ 'html', 'python', 'bash=sh', 'r', 'llvm', 'c', 'cpp', 'ocaml'
+  \ ]
+" -----}}}
 
-" Enable python syntax highlighting.
-"let python_highlight_builtin_objs = 1
-"let python_highlight_builtin_funcs = 1
-"let python_highlight_string_format = 1
-
-" nvim-r 
-" ======
-let R_vsplit = 1
+" nvim-r -----{{{2
+"let R_vsplit = 1
 let R_assign = 0
-let R_nvimcom_wait = -1
+let R_wait = -1
 let R_user_maps_only = 1
 let R_csv_warn = 0
 let rout_follow_colorscheme = 1
+" -----}}}
 
-" easy-align
-" ==========
+" easy-align -----{{{2
 let g:easy_align_ignore_groups = []
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
+" -----}}}
 
-" vim-tmux-navigator
-" ==================
+" vim-tmux-navigator -----{{{2
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <C-w>h :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-w>j :TmuxNavigateDown<cr>
 nnoremap <silent> <C-w>k :TmuxNavigateUp<cr>
 nnoremap <silent> <C-w>l :TmuxNavigateRight<cr>
+" -----}}}
+
+" deoplete -----{{{2
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 1
+let g:deoplete#max_list = 20
+
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.rust = 'racer#RacerComplete'
+
+let g:racer_cmd = '/usr/bin/racer'
+" -----}}}
 
 " -----}}}
 
@@ -138,6 +154,20 @@ nnoremap k gk
 tnoremap <c-w> <c-\><c-n><c-w>
 tnoremap <c-\><c-n><c-w><c-w> <c-w>
 tnoremap <esc> <c-\><c-n>
+
+" Make <tab> trigger deoplete.
+inoremap <silent><expr> <tab>
+		\ pumvisible() ? "\<c-n>" :
+		\ <SID>check_back_space() ? "\<tab>" :
+    \ deoplete#mappings#manual_complete()
+
+function! s:check_back_space() abort
+		let col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Make <bs> cancel deoplete.
+inoremap <expr><bs> deoplete#smart_close_popup()."\<c-h>"
 
 " Make vertical split syntax match e[dit]/v[iew] syntax.
 "cabbrev vsv vert sv
@@ -243,6 +273,14 @@ augroup tex
   autocmd FileType tex :setlocal foldmarker=(==,==)
 augroup END
 
+augroup markdown
+  autocmd!
+  " Use pandoc-markdown-syntax.
+  autocmd BufNewFile,BufFilePre,BufRead *.md :setlocal filetype=pandoc
+  " Use spell checking.
+  autocmd BufNewFile,BufFilePre,BufRead *.md :setlocal invspell
+augroup END
+
 augroup yaml
     autocmd!
     " Disable YAML indenting.
@@ -324,6 +362,8 @@ set shortmess=aoOtTI
 set splitright
 set splitbelow
 
+set completeopt-=preview
+
 " -----}}}
 " Status Line -----{{{1
 
@@ -359,7 +399,7 @@ set laststatus=2    " Always show status line.
 
 syntax on                           " Enable syntax highlighting.
 
-if $TERM ==? "st-256color" || $TERM ==? "tmux"
+if $TERM ==? "st-256color" || $TERM ==? "tmux-256color"
   set termguicolors                   " Enable 24-bit true color.
   colorscheme base16-solarized-light  " Set the color scheme.
 else
