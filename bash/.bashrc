@@ -25,6 +25,8 @@ eval $(dircolors -b $TTY_DIRCOLORS)
 # Aliases
 # =======
 
+alias jn='jupyter notebook'
+
 alias ls='ls -h --group-directories-first --color=auto'
 
 alias grep='grep -n --color=auto'
