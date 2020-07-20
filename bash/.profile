@@ -15,14 +15,25 @@ export EDITOR=nvim
 #export GDK_DPI_SCALE=0.5
 #export QT_DEVICE_PIXEL_RATIO=2
 
+
 # Make Wine emulate 32-bit Windows.
 #export WINEARCH=win32
 
 # Set up R user library (for development).
-export R_USER=${HOME}/.config/R
 export R_LIBS_USER=${HOME}/.config/R/library
-export R_MAKEVARS_USER=${HOME}/.config/R/Makevars
+export R_MAKEVARS_USER=${HOME}/.config/R/makevars
+export R_PROFILE_USER=${HOME}/.config/R/rprofile
 
+# Set up libxml2 for DocBook.
+export XML_CATALOG_FILES=${HOME}/garden/duncan/catalog.xml
+export XDYNDOCS=${HOME}/garden/duncan/XDynDocs/inst
+export XDYN_DOCS=${HOME}/garden/duncan/XDynDocs/inst
+
+# Make Java AWT behave in bspwm.
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Use system libstdc++ for Android emulator.
+export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 
 # Path
 # ====
@@ -30,14 +41,15 @@ export R_MAKEVARS_USER=${HOME}/.config/R/Makevars
 PATH="${HOME}/garden/bin:${PATH}"
 
 # Add Ruby Gems to the path.
-PATH="${PATH}:$(ruby -rubygems -e "puts Gem.user_dir")/bin"
+#PATH="${PATH}:$(ruby -rubygems -e "puts Gem.user_dir")/bin"
 
 # Add TeXLive to the path.
-PATH="${PATH}:/usr/local/texlive/2016/bin/x86_64-linux"
+PATH="${PATH}:/usr/local/texlive/2019/bin/x86_64-linux"
+
+# Add Cargo to the path.
+PATH="${HOME}/.cargo/bin:${PATH}"
 
 export PATH
-
-export PATH="$HOME/.cargo/bin:$PATH"
 
 
 # XDG Basedir Support
@@ -48,6 +60,14 @@ export ICEAUTHORITY=${XDG_CACHE_HOME}/ICEauthority
 
 export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
 export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
+
+
+# Gnome Keyring
+# =============
+if [ -n "$DESKTOP_SESSION" ];then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
 
 
 # TTY Colors
