@@ -1,0 +1,25 @@
+#! /bin/sh
+
+bspc subscribe monitor | while read -r line; do
+  case $line in
+    monitor_add*|monitor_geometry*)
+      if [ "$(bspc query -M | wc -l)" -eq "2" ]; then
+        bspc monitor ^1 --swap ^2
+        bspc desktop 1 --to-monitor ^1
+        bspc desktop 2 --to-monitor ^1
+        bspc desktop 3 --to-monitor ^1
+        bspc desktop Desktop --remove
+        bspc monitor ^1 --reorder-desktops 1 2 3
+        $HOME/.config/polybar/launch.sh
+      else
+        bspc desktop 1 --to-monitor ^1
+        bspc desktop 2 --to-monitor ^1
+        bspc desktop 3 --to-monitor ^1
+        bspc monitor ^1 --reorder-desktops 1 2 3 4
+      fi
+      ;;
+    *)
+    ;;
+  esac
+done &
+

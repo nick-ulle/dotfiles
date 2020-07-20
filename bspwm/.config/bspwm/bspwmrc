@@ -1,10 +1,13 @@
 #! /bin/sh
 
-compton -b
-$HOME/.config/polybar/launch.sh
+/usr/lib/cinnamon-settings-daemon/csd-background &
+picom -b
+nemo --no-default-window --no-desktop &
 
 sxhkd & #-f 50 &
-nemo --no-default-window --no-desktop &
+
+$HOME/.config/bspwm/monitors &
+$HOME/.config/polybar/launch.sh
 
 # --- Aesthetics {{{
 
@@ -17,14 +20,21 @@ bspc config split_ratio   0.50
 
 # ---}}}
 
+bspc config pointer_modifier mod4
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_side
+bspc config pointer_action3 resize_corner
+
 bspc config focus_follows_pointer   true
 bspc config pointer_follows_monitor true
 
-bspc config focus_by_distance    true
-bspc config history_aware_focus  true
+bspc config remove_unplugged_monitors true
+bspc config remove_disabled_monitors true
 
-bspc monitor primary --reset-desktops 1 2 3 4
-bspc monitor ^2 --reset-desktops 5 6 7 8
+bspc monitor eDP-1 --reset-desktops 1 2 3 4
+
+bspc rule --add Zathura state=tiled
+bspc rule --add Soffice state=tiled # Workaround for issue #655
 
 #bspc rule -a Gimp desktop=^8 state=floating follow=on
 #bspc rule -a Chromium desktop=^2
