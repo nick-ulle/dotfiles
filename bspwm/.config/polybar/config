@@ -12,14 +12,19 @@
 [bar/master]
 monitor = eDP-1
 bottom = true
-dock = false
+;dock = false
 width = 100%
 height = 48
 
-background = #22ffffff
-foreground = #fff
-lineheight = 4
+; Light Background (for dark wallpaper)
+;background = #22ffffff
 
+; Dark Background (for light wallpaper)
+background = #AA282828
+
+foreground = #fff
+
+lineheight = 4
 spacing = 1
 
 padding-left = 1
@@ -27,13 +32,13 @@ padding-right = 1
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = Hack:size=10;0
-font-1 = FontAwesome:size=10;0
+font-0 = "Hack:size=20;4"
+font-1 = "FontAwesome:size=20;4"
 
 modules-left = bspwm terminal settings
-modules-right = wireless-network battery volume ram date time
+modules-right = wireless-network battery alsa ram date time
 
-tray-position = right
+tray-position = center
 wm-restack = bspwm
 
 [module/bspwm]
@@ -43,8 +48,8 @@ workspace-icon-2 = 2
 workspace-icon-3 = 3
 workspace-icon-4 = 4
 
-label-active = 
-label-active-padding = 1
+label-focused = 
+label-focused-padding = 1
 
 label-urgent = 
 label-urgent-background = #8800ad9c
@@ -85,20 +90,20 @@ type = internal/battery
 battery = BAT0
 adapter = AC0
 
-label-full = " %percentage%"
+label-full = " %percentage%%"
 format-full-padding = 2
 
-label-charging = " %percentage%"
+label-charging = " %percentage%%"
 format-charging-padding = 2
 
-label-discharging = " %percentage%"
+label-discharging = " %percentage%%"
 format-discharging-background = #88407ee7
 format-discharging-padding = 2
 
-[module/volume]
-type = internal/volume
+[module/alsa]
+type = internal/alsa
 
-label-volume = " %percentage%"
+label-volume = " %percentage%%"
 format-volume-background = #885ab738
 format-volume-padding = 2
 
@@ -115,7 +120,7 @@ format-padding = 2
 [module/date]
 type = internal/date
 interval = 360
-date = " %b %-d"
+date = " %b %e"
 
 ;click-left = gsimplecal
 
@@ -123,6 +128,6 @@ format-padding = 2
 
 [module/time]
 type = internal/date
-date = " %-I:%M %p"
+date = " %H:%M"
 
 format-padding = 2
