@@ -33,3 +33,8 @@ setxkbmap -option 'compose:ralt'
 xrandr --newmode "2400x1800" \
   368.50   2400 2592 2848 3296   1800 1803 1807 1865   -hsync +vsync
 xrandr --addmode eDP-1 2400x1800
+
+# Flux
+# ====
+# Redshift monitor at night.
+xflux -z 95618
