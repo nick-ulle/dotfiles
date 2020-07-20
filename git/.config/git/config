@@ -8,11 +8,12 @@
 [alias]
 	stage = add
 	unstage = reset HEAD --
-	ls = log --oneline --decorate --graph -5
+	ls = log --graph --oneline --all -5
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
 
 [merge]
   tool = vimdiff
