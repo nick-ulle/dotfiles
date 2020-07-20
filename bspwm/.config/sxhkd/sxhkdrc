@@ -73,19 +73,6 @@ super + r : {j,k}
 #super + period ; space
 #	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
-
-# Mouse
-# -----
-# Focus window on click.
-~button1
-	bspc pointer --grab focus
-
-# Move or resize window on drag.
-super + button{1-3}
-	; bspc pointer --grab {move,resize_side,resize_corner}
-super + @button{1-3}
-	bspc pointer --ungrab
-
 # --- }}}
 
 # --- Session {{{
@@ -119,6 +106,13 @@ super + {i,I}
   {firefox,chromium}
 
 super + f
-  nemo --no-desktop
+  nemo
+
+super + {p,P}
+  chromium --profile-directory=Default \
+  --app-id={dpafpeglpbnacgjjkadphhaekcooeije,ickncfgekkmphkdppenffjmgikdhnfhf}
+
+super + {z,Z}
+  {zeal,zotero}
 
 # --- }}}
