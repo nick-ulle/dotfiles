@@ -8,33 +8,43 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Utilities
 Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/vim-easy-align'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-runner'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'PeterRincker/vim-argumentative'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'szw/vim-maximizer'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes'
+
+" Autocompletion.
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug  'ncm2/ncm2'
+Plug  'roxma/nvim-yarp'
+Plug  'ncm2/ncm2-bufword'
+Plug  'ncm2/ncm2-tmux'
+Plug  'ncm2/ncm2-path'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'zchee/deoplete-jedi'
+"Plug 'racer-rust/vim-racer'
 
 " Color Schemes
 Plug 'chriskempson/base16-vim'
 
 " Languages
+Plug 'udalov/kotlin-vim'
+Plug 'andrewmacp/llvm.vim'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'peterhoeg/vim-qml'
+"Plug 'jalvesaq/Nvim-R'
+Plug 'rust-lang/rust.vim'
 "Plugin 'hdima/python-syntax'
 "Plugin 'tmhedberg/SimpylFold'
 "Plugin 'hynek/vim-python-pep8-indent'
-"Plugin 'JuliaLang/julia-vim'
-Plug 'andrewmacp/llvm.vim'
-"Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'jalvesaq/Nvim-R'
-Plug 'peterhoeg/vim-qml'
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'zchee/deoplete-jedi'
-
-" Personal
-"Plugin 'nick-ulle/REPLize'
 
 call plug#end()
 
@@ -67,9 +77,28 @@ set hlsearch    " Highlight search results.
 " -----}}}
 " Plugin Settings -----{{{1
 
-let g:markdown_fenced_languages = [
-  \ 'html', 'python', 'bash=sh', 'r', 'llvm', 'c', 'cpp', 'ocaml'
-  \ ]
+" Don't try to unzip zip files.
+let g:loaded_zipPlugin = 1
+let g:loaded_zip = 1
+
+"let g:markdown_fenced_languages = [
+"  \ 'html', 'python', 'bash=sh', 'r', 'llvm', 'c', 'cpp', 'ocaml'
+"  \ ]
+
+" Logs stored in /tmp/Language*
+"let g:LanguageClient_loggingLevel = 'DEBUG'
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['python', '-m', 'pyls'],
+    \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ }
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_rootMarkers = {
+    \ 'rust': ['Cargo.toml'],
+    \ }
+
+" Restore minimized windows on entry.
+let g:maximizer_restore_on_winleave = 1
 
 " airline -----{{{2
 " Enable airline special characters.
@@ -94,10 +123,10 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
 " -----}}}
 
 " nvim-r -----{{{2
-"let R_vsplit = 1
+"let R_in_buffer = 0 "
 let R_assign = 0
 let R_wait = -1
-let R_user_maps_only = 1
+let R_user_maps_only = 1 " Don
 let R_csv_warn = 0
 let rout_follow_colorscheme = 1
 " -----}}}
@@ -119,14 +148,14 @@ nnoremap <silent> <C-w>l :TmuxNavigateRight<cr>
 " -----}}}
 
 " deoplete -----{{{2
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 1
-let g:deoplete#max_list = 20
-
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.rust = 'racer#RacerComplete'
-
-let g:racer_cmd = '/usr/bin/racer'
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#disable_auto_complete = 1
+"let g:deoplete#max_list = 20
+"
+"let g:deoplete#omni#functions = {}
+"let g:deoplete#omni#functions.rust = 'racer#RacerComplete'
+"
+"let g:racer_cmd = '/usr/bin/racer'
 " -----}}}
 
 " -----}}}
@@ -138,7 +167,7 @@ nnoremap . ;
 nnoremap ; .
 
 " Remap Q (ex mode) to play macros.
-nnoremap Q @
+nnoremap Q @q
 
 " Remap arrow keys to nav keys in normal/visual mode.
 noremap <left> <home>
@@ -154,20 +183,6 @@ nnoremap k gk
 tnoremap <c-w> <c-\><c-n><c-w>
 tnoremap <c-\><c-n><c-w><c-w> <c-w>
 tnoremap <esc> <c-\><c-n>
-
-" Make <tab> trigger deoplete.
-inoremap <silent><expr> <tab>
-		\ pumvisible() ? "\<c-n>" :
-		\ <SID>check_back_space() ? "\<tab>" :
-    \ deoplete#mappings#manual_complete()
-
-function! s:check_back_space() abort
-		let col = col('.') - 1
-		return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-" Make <bs> cancel deoplete.
-inoremap <expr><bs> deoplete#smart_close_popup()."\<c-h>"
 
 " Make vertical split syntax match e[dit]/v[iew] syntax.
 "cabbrev vsv vert sv
@@ -221,6 +236,31 @@ nnoremap <leader>s :set invspell <cr>
 " Shortcut for REPLize.
 "nnoremap <leader>o :call REPLize()<cr>
 " -----}}}
+" Plugin Mappings -----{{{1
+
+" Language Client
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" Tab is tab unless popup menu is open.
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Make <tab> trigger deoplete.
+"inoremap <silent><expr> <tab>
+"		\ pumvisible() ? "\<c-n>" :
+"		\ <SID>check_back_space() ? "\<tab>" :
+"    \ deoplete#mappings#manual_complete()
+"
+"function! s:check_back_space() abort
+"		let col = col('.') - 1
+"		return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction
+"
+"" Make <bs> cancel deoplete.
+"inoremap <expr><bs> deoplete#smart_close_popup()."\<c-h>"
+" -----}}}
 " Disabled Mappings -----{{{
 " Disable the mouse.
 set mouse=
@@ -238,6 +278,11 @@ vnoremap <F1> <esc>
 
 " -----}}}
 " Autocommands -----{{{1
+
+augroup ncm2
+  autocmd!
+  autocmd BufEnter  *  call ncm2#enable_for_buffer()
+augroup END
 
 augroup C
   autocmd!
@@ -263,6 +308,7 @@ augroup R
     \ noremap <buffer><silent> <localleader>r :call StartR("R")<cr>
   autocmd FileType r
     \ noremap <buffer><silent> <localleader>l :call SendLineToR("down")<cr>
+  "autocmd FileType r setlocal omnifunc=LanguageClient#complete
 augroup END
 
 augroup tex
@@ -271,6 +317,8 @@ augroup tex
   autocmd FileType tex :setlocal indentexpr&
   " Use (== and ==) as fold markers.
   autocmd FileType tex :setlocal foldmarker=(==,==)
+  " Use spell checking.
+  autocmd BufNewFile,BufFilePre,BufRead *.md :setlocal invspell
 augroup END
 
 augroup markdown
@@ -362,7 +410,8 @@ set shortmess=aoOtTI
 set splitright
 set splitbelow
 
-set completeopt-=preview
+"set completeopt-=preview
+set completeopt=noinsert,menuone,noselect
 
 " -----}}}
 " Status Line -----{{{1
