@@ -11,10 +11,17 @@
 
 # Keyboard Settings
 # =================
-# Map Alt_R to Compose and Capslock to F32.
+# Map Alt_R to Compose.
 setxkbmap -option 'compose:ralt'
-xmodmap -e "remove Lock = Caps_Lock"
-xmodmap -e "keysym Caps_Lock = F32"
+
+# Map Capslock to F32.
+#xmodmap -e "remove Lock = Caps_Lock"
+#xmodmap -e "keysym Caps_Lock = F32"
+
+# Note: instead of using xmodmap, now Capslock is remapped through XKB in
+# /usr/share/X11/xkb/symbols/pc
+#
+# (Just set key <CAPS> to F32)
 
 
 # Display Settings
