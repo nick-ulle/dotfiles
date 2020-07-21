@@ -1,27 +1,38 @@
 ; vim:ft=dosini
 ;
-; lemonbuddy configuration file
+; polybar main configuration file
+
+include-file = ~/.config/polybar/modules
+include-file = ~/.config/polybar/$WINDOW_MANAGER
+
+[colors]
+red = #885ab738
+blue = #88407ee7
+green = #885ab738
+teal = #8800ad9c
+; Gray Background (for light wallpaper)
+bg_gray = #aa282828
+; White Background (for dark wallpaper)
+bg_white = #22ffffff
 
 [settings]
-; Limit the amount of events sent to lemonbar within a set timeframe:
-; - "Allow <throttle_limit> updates within <throttle_ms> of time"
-; Default values:
-;throttle_limit = 5
-;throttle_ms = 50
+; Reload when a monitor is added/removed.
+screenchange-reload = true
 
-[bar/master]
-monitor = eDP-1
+; Prevent floods of update events.
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+
+format-padding = 2
+
+[bar/main]
+monitor = ${env:MONITOR:eDP-1}
 bottom = true
-;dock = false
 width = 100%
 height = 48
 
-; Light Background (for dark wallpaper)
-;background = #22ffffff
-
-; Dark Background (for light wallpaper)
-background = #AA282828
-
+background = ${colors.bg_gray}
 foreground = #fff
 
 lineheight = 4
@@ -32,102 +43,10 @@ padding-right = 1
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = "Hack:size=20;4"
-font-1 = "FontAwesome:size=20;4"
+; Use fc-list to list all fonts by fontconfig name.
+font-0 = "Hack Nerd Font:size=20;4"
 
-modules-left = bspwm terminal settings
-modules-right = wireless-network battery alsa ram date time
+modules-left = desktops terminal web settings
+modules-right = wireless-network battery audio ram date time
 
-tray-position = center
-wm-restack = bspwm
-
-[module/bspwm]
-type = internal/bspwm
-workspace-icon-1 = 1
-workspace-icon-2 = 2
-workspace-icon-3 = 3
-workspace-icon-4 = 4
-
-label-focused = 
-label-focused-padding = 1
-
-label-urgent = 
-label-urgent-background = #8800ad9c
-label-urgent-padding = 1
-
-label-occupied = 
-label-occupied-padding = 1
-label-empty = 
-label-empty-padding = 1
-
-[module/terminal]
-type = custom/text
-content = ""
-click-left = st -e tmux new-session &
-
-content-padding = 1
-
-[module/settings]
-type = custom/text
-content = ""
-click-left = cinnamon-settings &
-
-content-padding = 1
-
-[module/wireless-network]
-type = internal/network
-interface = wlp2s0
-
-label-connected = " %essid%"
-format-connected-padding = 2
-
-label-disconnected = " No Wifi"
-format-disconnected-background = #88f22c40
-format-disconnected-padding = 2
-
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = AC0
-
-label-full = " %percentage%%"
-format-full-padding = 2
-
-label-charging = " %percentage%%"
-format-charging-padding = 2
-
-label-discharging = " %percentage%%"
-format-discharging-background = #88407ee7
-format-discharging-padding = 2
-
-[module/alsa]
-type = internal/alsa
-
-label-volume = " %percentage%%"
-format-volume-background = #885ab738
-format-volume-padding = 2
-
-label-muted = " Mute"
-format-muted-padding = 2
-
-[module/ram]
-type = internal/memory
-interval = 30
-label = " %gb_used%"
-
-format-padding = 2
-
-[module/date]
-type = internal/date
-interval = 360
-date = " %b %e"
-
-;click-left = gsimplecal
-
-format-padding = 2
-
-[module/time]
-type = internal/date
-date = " %H:%M"
-
-format-padding = 2
+tray-position = ${env:TRAY_POSITION:center}

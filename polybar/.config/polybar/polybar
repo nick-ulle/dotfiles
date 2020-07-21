@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+(
+  # Based on https://github.com/polybar/polybar/issues/763
+
+  # Use a lock to prevent race conditions.
+  flock 200
+
+  # Terminate already running bar instances.
+  killall -q polybar
+
+  # Wait until the processes have been shut down.
+  while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
+
+  if [[ $(wmctrl -m | head -n 1 | cut -d " " -f 2 ) == "i3" ]]; then
+    export WINDOW_MANAGER=i3
+  else
+    export WINDOW_MANAGER=bspwm
+  fi
+
+  monitors=$(xrandr --query | rg " connected" | cut -d" " -f1)
+
+  # Place tray on HDMI-2 if available, otherwise eDP-1.
+  tray_output='eDP-1'
+  for m in $monitors; do
+    if [[ $m == "HDMI-2" ]]; then
+      tray_output=$m
+    fi
+  done
+
+  # Launch or reload polybar on each monitor.
+  for m in $monitors; do
+    export MONITOR=$m
+    export TRAY_POSITION=none
+    if [[ $m == $tray_output ]]; then
+      TRAY_POSITION=center
+    fi
+
+    # Launch bar.
+    polybar --reload main </dev/null >/var/tmp/polybar-$m.log 2>&1 200>&- &
+    disown
+  done
+) 200>/var/tmp/polybar-launch.lock

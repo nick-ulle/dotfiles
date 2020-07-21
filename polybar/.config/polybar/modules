@@ -1,0 +1,68 @@
+; vim:ft=dosini
+;
+; polybar module configuration file
+
+[module/terminal]
+type = custom/text
+content = ""
+click-left = st -e tmux new-session &
+
+content-padding = 1
+
+[module/web]
+type = custom/text
+content = ""
+click-left = firefox &
+
+content-padding = 1
+
+[module/settings]
+type = custom/text
+content = ""
+click-left = cinnamon-settings &
+
+content-padding = 1
+
+[module/wireless-network]
+type = internal/network
+interface = wlp2s0
+
+label-connected = "  %essid%"
+
+label-disconnected = " No Wifi"
+format-disconnected-background = ${colors.red}
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+
+label-full = "  %percentage%%"
+format-full-padding = 2
+
+label-charging = "  %percentage%%"
+
+label-discharging = "  %percentage%%"
+format-discharging-background = ${colors.blue}
+
+[module/audio]
+type = internal/alsa
+
+label-volume = "  %percentage%%"
+format-volume-background = ${colors.green}
+
+label-muted = "  Mute"
+
+[module/ram]
+type = internal/memory
+interval = 30
+label = "  %gb_used%"
+
+[module/date]
+type = internal/date
+interval = 360
+date = "  %b %e"
+
+[module/time]
+type = internal/date
+date = "  %H:%M"
