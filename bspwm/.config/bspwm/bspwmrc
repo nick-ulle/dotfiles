@@ -1,13 +1,21 @@
 #! /bin/sh
 
 /usr/lib/cinnamon-settings-daemon/csd-background &
-picom -b
 nemo --no-default-window --no-desktop &
+picom --daemon
 
 sxhkd & #-f 50 &
 
+if [ "$(bspc query -M | wc -l)" -eq "2" ]; then
+  bspc wm --reorder-monitors HDMI-2 eDP-1
+  bspc monitor HDMI-2 --reset-desktops D1 D2 D3
+  bspc monitor eDP-1 --reset-desktops D4
+else
+  bspc monitor eDP-1 --reset-desktops D1 D2 D3 D4
+fi
+
+$HOME/.config/polybar/polybar
 $HOME/.config/bspwm/monitors &
-$HOME/.config/polybar/launch.sh
 
 # --- Aesthetics {{{
 
@@ -30,8 +38,6 @@ bspc config pointer_follows_monitor true
 
 bspc config remove_unplugged_monitors true
 bspc config remove_disabled_monitors true
-
-bspc monitor eDP-1 --reset-desktops 1 2 3 4
 
 bspc rule --add Zathura state=tiled
 bspc rule --add Soffice state=tiled # Workaround for issue #655

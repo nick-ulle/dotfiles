@@ -4,19 +4,18 @@ bspc subscribe monitor | while read -r line; do
   case $line in
     monitor_add*|monitor_geometry*)
       if [ "$(bspc query -M | wc -l)" -eq "2" ]; then
-        bspc monitor ^1 --swap ^2
-        bspc desktop 1 --to-monitor ^1
-        bspc desktop 2 --to-monitor ^1
-        bspc desktop 3 --to-monitor ^1
+        bspc wm --reorder-monitors HDMI-2 eDP-1
+        bspc desktop D1 --to-monitor HDMI-2
+        bspc desktop D2 --to-monitor HDMI-2
+        bspc desktop D3 --to-monitor HDMI-2
         bspc desktop Desktop --remove
-        bspc monitor ^1 --reorder-desktops 1 2 3
-        $HOME/.config/polybar/launch.sh
       else
-        bspc desktop 1 --to-monitor ^1
-        bspc desktop 2 --to-monitor ^1
-        bspc desktop 3 --to-monitor ^1
-        bspc monitor ^1 --reorder-desktops 1 2 3 4
+        bspc desktop D1 --to-monitor eDP-1
+        bspc desktop D2 --to-monitor eDP-1
+        bspc desktop D3 --to-monitor eDP-1
+        bspc monitor eDP-1 --reorder-desktops D1 D2 D3 D4
       fi
+      #$HOME/.config/polybar/launch.sh
       ;;
     *)
     ;;
