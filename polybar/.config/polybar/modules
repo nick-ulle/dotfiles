@@ -29,7 +29,7 @@ interface = wlp2s0
 
 label-connected = "  %essid%"
 
-label-disconnected = " No Wifi"
+label-disconnected = "  No Wifi"
 format-disconnected-background = ${colors.red}
 
 [module/battery]
