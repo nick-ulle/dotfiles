@@ -7,7 +7,7 @@ crtc 1
 gamma 1.031:1.0:1.02
 mode 3200x1800
 pos 0x0
-rate 60.00
+rate 59.96
 output HDMI-2
 crtc 0
 gamma 1.031:1.0:1.02

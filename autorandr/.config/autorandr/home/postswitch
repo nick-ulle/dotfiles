@@ -1,0 +1,14 @@
+#!/bin/sh
+
+$HOME/.config/polybar/polybar &
+
+if bspc query --monitors; then
+  bspc wm --reorder-monitors HDMI-2 eDP-1
+  bspc desktop D1 --to-monitor HDMI-2
+  bspc desktop D2 --to-monitor HDMI-2
+  bspc desktop D3 --to-monitor HDMI-2
+  bspc desktop D4 --to-monitor HDMI-2
+  bspc desktop D5 --to-monitor eDP-1
+
+  bspc desktop Desktop --remove
+fi
