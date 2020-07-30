@@ -48,6 +48,7 @@ alias .research='cd ${HOME}/workshop/research'
 alias .teach='cd ${HOME}/university/teach'
 alias .learn='cd ${HOME}/university/learn'
 alias .work='cd ${HOME}/workshop'
+alias .config='cd ${HOME}/.config'
 
 alias .todo='nvim ~/TODO.md'
 
