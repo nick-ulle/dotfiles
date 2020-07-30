@@ -13,6 +13,8 @@ workspace 5 output eDP-1
 
 exec_always --no-startup-id ~/.config/polybar/polybar
 
+exec --no-startup-id i3altlayout
+
 # Restart i3.
 bindsym $mod+BackSpace reload
 bindsym $mod+Shift+BackSpace restart
@@ -110,7 +112,7 @@ bindsym $mod+Control+l move right
 bindsym $mod+q kill
 
 # TODO: Monocle on current window.
-bindsym $mod+space layout toggle stacking splitv
+bindsym $mod+space layout toggle stacking split
 
 # Fullscreen on current window.
 bindsym $mod+Shift+space fullscreen toggle
