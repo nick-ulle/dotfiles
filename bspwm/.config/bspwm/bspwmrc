@@ -1,21 +1,13 @@
 #! /bin/sh
 
-/usr/lib/cinnamon-settings-daemon/csd-background &
-nemo --no-default-window --no-desktop &
-picom --daemon
-
 sxhkd & #-f 50 &
 
-if [ "$(bspc query -M | wc -l)" -eq "2" ]; then
-  bspc wm --reorder-monitors HDMI-2 eDP-1
-  bspc monitor HDMI-2 --reset-desktops D1 D2 D3
-  bspc monitor eDP-1 --reset-desktops D4
-else
-  bspc monitor eDP-1 --reset-desktops D1 D2 D3 D4
-fi
+picom --daemon
 
-$HOME/.config/polybar/polybar
-$HOME/.config/bspwm/monitors &
+/usr/lib/cinnamon-settings-daemon/csd-background &
+nemo --no-default-window --no-desktop &
+
+$HOME/.config/polybar/polybar &
 
 # --- Aesthetics {{{
 
@@ -42,8 +34,14 @@ bspc config remove_disabled_monitors true
 bspc rule --add Zathura state=tiled
 bspc rule --add Soffice state=tiled # Workaround for issue #655
 
-#bspc rule -a Gimp desktop=^8 state=floating follow=on
-#bspc rule -a Chromium desktop=^2
-#bspc rule -a mplayer2 state=floating
-#bspc rule -a Kupfer.py focus=on
-#bspc rule -a Screenkey manage=off
+bspc rule --add zoom state=floating center=true rectangle=2560x1440+0+0
+
+
+if [ "$(bspc query -M | wc -l)" -eq "2" ]; then
+  bspc monitor HDMI-2 --reset-desktops D1 D2 D3 D4
+  bspc monitor eDP-1 --reset-desktops D5
+  bspc wm --reorder-monitors HDMI-2 eDP-1
+else
+  bspc monitor eDP-1 --reset-desktops D1 D2 D3 D4 D5
+fi
+
