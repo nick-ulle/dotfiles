@@ -8,7 +8,9 @@ wm-restack = bspwm
 [module/desktops]
 type = internal/bspwm
 
-label-focused = 
+ws-icon-default = 
+
+label-focused = "%icon%"
 label-focused-padding = 1
 
 label-urgent = 
