@@ -35,6 +35,9 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # Use system libstdc++ for Android emulator.
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 
+# Set up grip settings directory.
+export GRIPHOME=${HOME}/.config/grip
+
 # Path
 # ====
 # Add the binaries directory to the path.
@@ -48,6 +51,9 @@ PATH="${PATH}:/usr/local/texlive/2019/bin/x86_64-linux"
 
 # Add Cargo to the path.
 PATH="${HOME}/.cargo/bin:${PATH}"
+
+# Add local bin to the path.
+PATH="${HOME}/.local/bin:${PATH}"
 
 export PATH
 
