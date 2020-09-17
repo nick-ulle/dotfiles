@@ -1,0 +1,80 @@
+.First = function() {
+  if (!interactive())
+    return()
+  
+  options(
+    max.print = 1000
+  
+    # Don't use GUIs.
+    , menu.graphics = FALSE
+  
+    # Set up the prompt.
+    , prompt = "> "
+    , continue = ". "
+    # Color prompt (seems to cause printing problems)
+    #, prompt   = "\033[38;5;28m>\033[39m "
+    #, continue = "\033[38;5;28m.\033[39m "
+  
+    # Use RStudio CRAN mirror.
+    , repos = c(CRAN = "https://cran.rstudio.org")
+  
+    # Fancy quotes are annoying.
+    , useFancyQuotes = FALSE
+  
+    # Warn on partial matches.
+    , warnPartialMatchAttr = TRUE
+    , warnPartialMatchDollar = TRUE
+    , warnPartialMatchArgs = TRUE
+  
+    # Print warnings immediately (2 = warnings are errors).
+    , warn = 1
+  )
+  
+  # Enable autocompletion for package names in `require()` and `library()`.
+  utils::rc.settings(ipck = TRUE)
+  
+  # devtools --------------------
+  NAME = intToUtf8(c(
+    78L, 105L, 99L, 107L, 32L, 85L, 108L, 108L, 101L
+  ))
+  EMAIL = intToUtf8(c(
+    110L, 105L, 99L, 107L, 46L, 117L, 108L, 108L, 101L, 64L, 103L, 109L, 97L,
+    105L, 108L, 46L, 99L, 111L, 109L
+  ))
+
+  options(
+    devtools.desc = list(
+      Author = NAME
+      , Maintainer = paste0(NAME, " <", EMAIL, ">")
+      , License = "BSD_3_clause + file LICENSE"
+      , Version = "0.0.1.9000"
+    )
+    , devtools.name = NAME
+  )
+
+  # local override --------------------
+  if (file.exists(".Rprofile"))
+    source(".Rprofile")
+  
+  # startup --------------------
+  message(
+    R.version[["version.string"]], " -- ", R.version[["nickname"]], "\n"
+    , "Type 'citation()', 'contributors()', or 'license()' for more information\n"
+    , "\n"
+    , "Libraries:\n"
+    , paste("*", .libPaths(), collapse = "\n")
+    , "\n"
+  )
+}
+
+setHook(
+  packageEvent("languageserver", "onLoad"),
+  function(...) {
+    options(languageserver.default_linters = lintr::with_defaults(
+      assignment_linter = NULL
+      , commas_linter = NULL
+      , commented_code_linter = NULL
+      , open_curly_linter = NULL
+    ))
+  }
+)

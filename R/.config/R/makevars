@@ -1,0 +1,10 @@
+
+# Set _GLIBCXX_USE_CXX11=0 to avoid linking issues with LLVM. In gcc 5, the ABI
+# is different from previous versions and currently incompatible with Clang's
+# ABI.
+CC=clang
+CXX=clang++
+CXX11=clang++
+#CXXFLAGS=-D_GLIBCXX_USE_CXX11_ABI=0
+CXXFLAGS=-g
+CFLAGS=-g
