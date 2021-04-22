@@ -9,6 +9,7 @@
 # =====================
 # Make Vim the default editor.
 export EDITOR=nvim
+export DIFFPROG="nvim -d"
 
 # Set GTK3 and QT5 high DPI scaling.
 #export GDK_SCALE=2
