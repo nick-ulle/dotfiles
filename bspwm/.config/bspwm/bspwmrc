@@ -44,6 +44,7 @@ if [ "$(bspc query -M | wc -l)" -eq "2" ]; then
   bspc monitor HDMI-2 --reset-desktops D1 D2 D3 D4
   bspc monitor eDP-1 --reset-desktops D5
   bspc wm --reorder-monitors HDMI-2 eDP-1
+  bspc desktop --focus D1
 else
   bspc monitor eDP-1 --reset-desktops D1 D2 D3 D4 D5
 fi
