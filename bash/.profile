@@ -52,7 +52,7 @@ PATH="${HOME}/garden/bin:${PATH}"
 PATH="${HOME}/.config/ruby/gems/bin:${PATH}"
 
 # Add TeXLive to the path.
-PATH="${PATH}:/usr/local/texlive/2019/bin/x86_64-linux"
+PATH="/usr/local/texlive/2019/bin/x86_64-linux:${PATH}"
 
 # Add Cargo to the path.
 PATH="${HOME}/.cargo/bin:${PATH}"
