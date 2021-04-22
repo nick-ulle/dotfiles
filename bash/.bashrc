@@ -42,6 +42,7 @@ alias grep='grep -n --color=auto'
 
 alias dl='trash-put'
 
+alias .datalab='cd ${HOME}/workshop/datalab'
 alias .library='cd ${HOME}/archive/library'
 alias .market='cd ${HOME}/market'
 alias .research='cd ${HOME}/workshop/research'
