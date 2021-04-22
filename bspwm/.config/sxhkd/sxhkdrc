@@ -54,10 +54,10 @@ super + Tab
 
 # Resize Mode
 # -----------
-super + r : {h,l}
+super + w : {h,l}
   INC={-10,+10}; bspc node @east -r $INC || bspc node @west -r $INC
 
-super + r : {j,k}
+super + w : {j,k}
   INC={+10,-10}; bspc node @north -r $INC || bspc node @south -r $INC
 
 
