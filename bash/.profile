@@ -25,6 +25,9 @@ export R_LIBS_USER=${HOME}/.config/R/library
 export R_MAKEVARS_USER=${HOME}/.config/R/makevars
 export R_PROFILE_USER=${HOME}/.config/R/rprofile
 
+# Set up Ruby Gems directory.
+export GEM_HOME=${HOME}/.config/ruby/gems
+
 # Set up libxml2 for DocBook.
 export XML_CATALOG_FILES=${HOME}/garden/duncan/catalog.xml
 export XDYNDOCS=${HOME}/garden/duncan/XDynDocs/inst
@@ -39,13 +42,14 @@ export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 # Set up grip settings directory.
 export GRIPHOME=${HOME}/.config/grip
 
+
 # Path
 # ====
 # Add the binaries directory to the path.
 PATH="${HOME}/garden/bin:${PATH}"
 
 # Add Ruby Gems to the path.
-#PATH="${PATH}:$(ruby -rubygems -e "puts Gem.user_dir")/bin"
+PATH="${HOME}/.config/ruby/gems/bin:${PATH}"
 
 # Add TeXLive to the path.
 PATH="${PATH}:/usr/local/texlive/2019/bin/x86_64-linux"
