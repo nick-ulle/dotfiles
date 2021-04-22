@@ -115,6 +115,9 @@ XF86PowerOff
 XF86Audio{Mute,LowerVolume,RaiseVolume}
   amixer set Master {toggle,4%-,4%+}
 
+super + a
+  pulse_toggle
+
 # --- }}}
 
 # --- Applications {{{
@@ -143,5 +146,8 @@ super + p
 
 super + {z,Z}
   {zeal,zotero}
+
+super + s
+  slack
 
 # --- }}}
