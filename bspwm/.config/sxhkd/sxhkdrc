@@ -18,6 +18,10 @@ super + {_,shift + }{grave,1-4}
 super + {h,j,k,l}
 	bspc node --focus {west,south,north,east}
 
+super + {Left,Down,Up,Right}
+	bspc node --focus {west,south,north,east}
+
+
 # Reorient windows.
 super + {H,L}
   bspc node {west,east} --presel-dir south \
@@ -27,9 +31,22 @@ super + {J,K}
   bspc node {south,north} --presel-dir east \
   && bspc node --to-node last.'!automatic'
 
+super + shift + {Left,Right}
+  bspc node {west,east} --presel-dir south \
+  && bspc node --to-node last.'!automatic'
+
+super + shift + {Down,Up}
+  bspc node {south,north} --presel-dir east \
+  && bspc node --to-node last.'!automatic'
+
+
 # Swap windows.
 super + ctrl + {h,j,k,l}
   bspc node --swap {west,south,north,east}
+
+super + ctrl + {Left,Down,Up,Right}
+  bspc node --swap {west,south,north,east}
+
 
 # Close or kill windows.
 super + {_,shift + }q
@@ -60,6 +77,11 @@ super + w : {h,l}
 super + w : {j,k}
   INC={+10,-10}; bspc node @north -r $INC || bspc node @south -r $INC
 
+super + w : {Left,Right}
+  INC={-10,+10}; bspc node @east -r $INC || bspc node @west -r $INC
+
+super + w : {Down,Up}
+  INC={+10,-10}; bspc node @north -r $INC || bspc node @south -r $INC
 
 # Preselect Mode
 # --------------
