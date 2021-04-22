@@ -3,6 +3,7 @@
 sxhkd & #-f 50 &
 
 picom --daemon
+xsetroot -cursor_name left_ptr
 
 /usr/lib/cinnamon-settings-daemon/csd-background &
 nemo --no-default-window --no-desktop &
