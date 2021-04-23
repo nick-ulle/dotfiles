@@ -30,7 +30,8 @@ format-padding = 2
 monitor = ${env:MONITOR:eDP-1}
 bottom = true
 width = 100%
-height = 48
+;height = 48
+height = 32
 
 background = ${colors.bg_gray}
 foreground = #fff
@@ -44,7 +45,8 @@ module-margin-left = 0
 module-margin-right = 0
 
 ; Use fc-list to list all fonts by fontconfig name.
-font-0 = "Hack Nerd Font:size=20;4"
+;font-0 = "Hack Nerd Font:size=20;4"
+font-0 = "Hack Nerd Font:size=12;4"
 
 modules-left = desktops terminal web settings
 modules-right = wireless-network battery audio ram date time
