@@ -132,7 +132,8 @@ super + r
 #  -o 1.0 #-dim 0.8 -dc "#1b1918"
 
 super + {c,C}
-  st{_, -f 'Hack:pixelsize=50'} -e tmux new-session
+#  st{_, -f 'Hack Nerd Font:pixelsize=50'} -e tmux new-session
+  st -f 'Hack Nerd Font:pixelsize={18,30}' -e tmux new-session
 
 super + {n,N}
   {firefox,chromium}
