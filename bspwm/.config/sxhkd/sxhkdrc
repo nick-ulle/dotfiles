@@ -7,8 +7,8 @@ super + BackSpace
 
 # Focus desktop or send to desktop.
 
-super + {_,shift + }{grave,1-4}
-	bspc {desktop --focus,node -d} '^{5,1-4}'
+super + {_,shift + }{grave,1-6}
+	bspc {desktop --focus,node -d} '^{7,1-6}'
 
 # --- }}}
 
