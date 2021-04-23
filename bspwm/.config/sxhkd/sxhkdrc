@@ -131,15 +131,15 @@ super + d
 super + {c,C}
   st{_, -f 'Hack:pixelsize=50'} -e tmux new-session
 
-super + {i,I}
+super + {n,N}
   {firefox,chromium}
 
 super + f
   nemo
 
-super + n
-  chromium --profile-directory=Default \
-  --app-id={ickncfgekkmphkdppenffjmgikdhnfhf,dpafpeglpbnacgjjkadphhaekcooeije}
+# super + n
+#   chromium --profile-directory=Default \
+#   --app-id={ickncfgekkmphkdppenffjmgikdhnfhf,dpafpeglpbnacgjjkadphhaekcooeije}
 
 super + p
   autorandr --change --force
