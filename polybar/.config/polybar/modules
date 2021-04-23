@@ -25,7 +25,7 @@ content-padding = 1
 
 [module/wireless-network]
 type = internal/network
-interface = wlp2s0
+interface = wlan0
 
 label-connected = "  %essid%"
 
