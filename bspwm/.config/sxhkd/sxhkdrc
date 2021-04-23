@@ -123,10 +123,13 @@ super + a
 # --- Applications {{{
 
 # Also looks good with -sb #df5320.
-super + d
-  dmenu_run -b -x 365 -w 1000 -h 48 -fn InconsolataforPowerline-12 \
+super + r
+  dmenu_run -b -x 250 -w 650 -h 32 -fn HackNerdFont-12 \
   -nf "#fff" -sf "#fff" -nb "#1b1918" -sb "#6666ea" -p ">_ " \
   -o 1.0 #-dim 0.8 -dc "#1b1918"
+#  dmenu_run -b -x 395 -w 1000 -h 48 -fn HackNerdFont-12 \
+#  -nf "#fff" -sf "#fff" -nb "#1b1918" -sb "#6666ea" -p ">_ " \
+#  -o 1.0 #-dim 0.8 -dc "#1b1918"
 
 super + {c,C}
   st{_, -f 'Hack:pixelsize=50'} -e tmux new-session
