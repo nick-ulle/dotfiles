@@ -46,7 +46,7 @@ label-discharging = "  %percentage%%"
 format-discharging-background = ${colors.blue}
 
 [module/audio]
-type = internal/alsa
+type = internal/pulseaudio
 
 label-volume = "  %percentage%%"
 format-volume-background = ${colors.green}
