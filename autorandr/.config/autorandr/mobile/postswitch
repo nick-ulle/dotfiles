@@ -8,5 +8,7 @@ if bspc query --monitors; then
   bspc desktop D3 --to-monitor eDP-1
   bspc desktop D4 --to-monitor eDP-1
   bspc desktop D5 --to-monitor eDP-1
-  bspc monitor eDP-1 --reorder-desktops D1 D2 D3 D4 D5
+  bspc desktop D6 --to-monitor eDP-1
+  bspc desktop D7 --to-monitor eDP-1
+  bspc monitor eDP-1 --reorder-desktops D1 D2 D3 D4 D5 D6 D7
 fi
