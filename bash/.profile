@@ -5,8 +5,87 @@
 # file if .bash_profile is found.
 
 
-# Environment Variables
-# =====================
+# Path
+# ====
+# Add local bin to the path.
+PATH="${HOME}/.local/bin:${PATH}"
+
+# Add the binaries directory to the path.
+PATH="${HOME}/garden/bin:${PATH}"
+
+# Add Ruby Gems to the path.
+PATH="${XDG_CONFIG_HOME}/ruby/gems/bin:${PATH}"
+
+# Add TeXLive to the path.
+PATH="/usr/local/texlive/2021/bin/x86_64-linux:${PATH}"
+export MANPATH="/usr/local/texlive/2021/texmf-dist/doc/man:${MANPATH}"
+export INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:${INFOPATH}"
+
+# Add Cargo to the path.
+PATH="${HOME}/.cargo/bin:${PATH}"
+
+# Make this an environment variable.
+export PATH
+
+
+# XDG Basedir Support
+# ===================
+# From <https://specifications.freedesktop.org/basedir-spec/>:
+#
+# > $XDG_CONFIG_HOME defines the base directory relative to which user-specific
+# > configuration files should be stored. If $XDG_CONFIG_HOME is either not set
+# > or empty, a default equal to $HOME/.config should be used.
+# >
+# > $XDG_CACHE_HOME defines the base directory relative to which user-specific
+# > non-essential data files should be stored. If $XDG_CACHE_HOME is either not
+# > set or empty, a default equal to $HOME/.cache should be used.
+# >
+# > $XDG_DATA_HOME defines the base directory relative to which user-specific
+# > data files should be stored. If $XDG_DATA_HOME is either not set or empty,
+# > a default equal to $HOME/.local/share should be used.
+# >
+# > $XDG_STATE_HOME defines the base directory relative to which user-specific
+# > state files should be stored. If $XDG_STATE_HOME is either not set or
+# > empty, a default equal to $HOME/.local/state should be used.
+#
+# Explicitly set the XDG variables for use later.
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_STATE_HOME="${HOME}/.local/state"
+
+
+# Config Files
+# ------------
+# Set up R user library (for development).
+export R_LIBS_USER=${XDG_CONFIG_HOME}/R/library
+export R_MAKEVARS_USER=${XDG_CONFIG_HOME}/R/makevars
+export R_PROFILE_USER=${XDG_CONFIG_HOME}/R/rprofile
+
+# Set up Ruby Gems directory.
+export GEM_HOME=${XDG_CONFIG_HOME}/ruby/gems
+
+# Set up grip settings directory.
+export GRIPHOME=${XDG_CONFIG_HOME}/grip
+
+# Set up gnupg settings directory.
+export GNUPGHOME=${XDG_CONFIG_HOME}/gnupg
+
+export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
+export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
+
+
+# Gnome Keyring
+# =============
+# Only run if in desktop session and not already running.
+if [ -n "$DESKTOP_SESSION" ] && ! [ -n "$SSH_AUTH_SOCK" ];then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
+
+
+# Other Settings
+# ==============
 # Make Vim the default editor.
 export EDITOR=nvim
 export DIFFPROG="nvim -d"
@@ -16,56 +95,5 @@ export DIFFPROG="nvim -d"
 #export GDK_DPI_SCALE=0.5
 #export QT_DEVICE_PIXEL_RATIO=2
 
-# Set up R user library (for development).
-export R_LIBS_USER=${HOME}/.config/R/library
-export R_MAKEVARS_USER=${HOME}/.config/R/makevars
-export R_PROFILE_USER=${HOME}/.config/R/rprofile
-
-# Set up Ruby Gems directory.
-export GEM_HOME=${HOME}/.config/ruby/gems
-
 # Make Java AWT behave in bspwm.
 export _JAVA_AWT_WM_NONREPARENTING=1
-
-# Set up grip settings directory.
-export GRIPHOME=${HOME}/.config/grip
-
-
-# Path
-# ====
-# Add the binaries directory to the path.
-PATH="${HOME}/garden/bin:${PATH}"
-
-# Add Ruby Gems to the path.
-PATH="${HOME}/.config/ruby/gems/bin:${PATH}"
-
-# Add TeXLive to the path.
-PATH="/usr/local/texlive/2021/bin/x86_64-linux:${PATH}"
-MANPATH="/usr/local/texlive/2021/texmf-dist/doc/man:${MANPATH}"
-INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:${INFOPATH}"
-
-# Add Cargo to the path.
-PATH="${HOME}/.cargo/bin:${PATH}"
-
-# Add local bin to the path.
-PATH="${HOME}/.local/bin:${PATH}"
-
-export PATH
-export MANPATH
-export INFOPATH
-
-
-# XDG Basedir Support
-# ===================
-export GNUPGHOME=${XDG_CONFIG_HOME}/gnupg
-
-export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
-export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
-
-
-# Gnome Keyring
-# =============
-if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
-fi
