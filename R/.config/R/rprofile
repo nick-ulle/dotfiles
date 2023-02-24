@@ -1,38 +1,38 @@
 .First = function() {
   if (!interactive())
     return()
-  
+
   options(
     max.print = 1000
-  
+
     # Don't use GUIs.
     , menu.graphics = FALSE
-  
+
     # Set up the prompt.
     , prompt = "> "
     , continue = ". "
     # Color prompt (seems to cause printing problems)
     #, prompt   = "\033[38;5;28m>\033[39m "
     #, continue = "\033[38;5;28m.\033[39m "
-  
+
     # Use RStudio CRAN mirror.
     , repos = c(CRAN = "https://cran.rstudio.org")
-  
+
     # Fancy quotes are annoying.
     , useFancyQuotes = FALSE
-  
+
     # Warn on partial matches.
     , warnPartialMatchAttr = TRUE
     , warnPartialMatchDollar = TRUE
     , warnPartialMatchArgs = TRUE
-  
+
     # Print warnings immediately (2 = warnings are errors).
     , warn = 1
   )
-  
+
   # Enable autocompletion for package names in `require()` and `library()`.
   utils::rc.settings(ipck = TRUE)
-  
+
   # devtools --------------------
   NAME = intToUtf8(c(
     78L, 105L, 99L, 107L, 32L, 85L, 108L, 108L, 101L
@@ -55,26 +55,20 @@
   # local override --------------------
   if (file.exists(".Rprofile"))
     source(".Rprofile")
-  
+
   # startup --------------------
+  lib_paths = .libPaths()
+  n_pkgs = local({
+    p = utils::installed.packages()[, "LibPath"]
+    p = factor(p, lib_paths)
+    table(p)
+  })
   message(
     R.version[["version.string"]], " -- ", R.version[["nickname"]], "\n"
     , "Type 'citation()', 'contributors()', or 'license()' for more information\n"
     , "\n"
     , "Libraries:\n"
-    , paste("*", .libPaths(), collapse = "\n")
+    , paste0("* [", n_pkgs, "] ", .libPaths(), collapse = "\n")
     , "\n"
   )
 }
-
-setHook(
-  packageEvent("languageserver", "onLoad"),
-  function(...) {
-    options(languageserver.default_linters = lintr::with_defaults(
-      assignment_linter = NULL
-      , commas_linter = NULL
-      , commented_code_linter = NULL
-      , open_curly_linter = NULL
-    ))
-  }
-)
