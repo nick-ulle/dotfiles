@@ -6,9 +6,11 @@
 	editor = nvim
 
 [alias]
-	stage = add
-	unstage = reset HEAD --
 	ls = log --graph --oneline --all -5
+	stage = add
+	staged = diff --staged
+	unstage = reset HEAD --
+	permission-reset = !git diff -p -R --no-ext-diff --no-color | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
