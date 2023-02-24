@@ -40,7 +40,9 @@ PATH="${HOME}/garden/bin:${PATH}"
 PATH="${HOME}/.config/ruby/gems/bin:${PATH}"
 
 # Add TeXLive to the path.
-PATH="/usr/local/texlive/2019/bin/x86_64-linux:${PATH}"
+PATH="/usr/local/texlive/2021/bin/x86_64-linux:${PATH}"
+MANPATH="/usr/local/texlive/2021/texmf-dist/doc/man:${MANPATH}"
+INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:${INFOPATH}"
 
 # Add Cargo to the path.
 PATH="${HOME}/.cargo/bin:${PATH}"
@@ -49,6 +51,8 @@ PATH="${HOME}/.cargo/bin:${PATH}"
 PATH="${HOME}/.local/bin:${PATH}"
 
 export PATH
+export MANPATH
+export INFOPATH
 
 
 # XDG Basedir Support
