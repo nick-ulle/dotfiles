@@ -59,8 +59,6 @@ export INFOPATH
 # ===================
 export GNUPGHOME=${XDG_CONFIG_HOME}/gnupg
 
-export ICEAUTHORITY=${XDG_CACHE_HOME}/ICEauthority
-
 export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
 export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
 
