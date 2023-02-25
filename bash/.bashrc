@@ -54,14 +54,6 @@ alias grep='grep -n --color=auto'
 
 alias dl='trash-put'
 
-alias .datalab='cd ${HOME}/workshop/datalab'
-alias .library='cd ${HOME}/archive/library'
-alias .market='cd ${HOME}/market'
-alias .research='cd ${HOME}/workshop/research'
-alias .teach='cd ${HOME}/university/teach'
-alias .learn='cd ${HOME}/university/learn'
-alias .work='cd ${HOME}/workshop'
-alias .config='cd ${HOME}/.config'
 
 alias .todo='nvim ~/TODO.md'
 
@@ -78,6 +70,10 @@ alias o='open'
 
 alias up='cd ..'
 alias back='cd ~-'
+
+# zoxide init
+eval "$(zoxide init bash)"
+
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
 export MAMBA_EXE="/home/nick/.local/bin/micromamba";
