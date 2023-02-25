@@ -31,6 +31,16 @@ alias du='du --human-readable --max-depth 1'
 alias df='df --human-readable --exclude-type tmpfs'
 
 alias ssh='TERM=xterm-256color ssh'
+
+# This function creates an SSH tunnel (e.g., for JupyterLab).
+function ssht {
+  local remote="${1:-farm}"
+  local host="${2:-gpu-4-56}"
+  local socket="${3:-8888}"
+  # local_socket:host:remote_socket
+  ssh $remote -L "$socket:$host:$socket" -N
+}
+
 alias mm='micromamba'
 
 function mma {
