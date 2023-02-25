@@ -19,15 +19,17 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
 
 " Autocompletion.
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug  'ncm2/ncm2'
-Plug  'roxma/nvim-yarp'
-Plug  'ncm2/ncm2-bufword'
-Plug  'ncm2/ncm2-tmux'
-Plug  'ncm2/ncm2-path'
+Plug 'neovim/nvim-lspconfig'
+"Plug 'autozimu/LanguageClient-neovim', {
+"    \ 'branch': 'next',
+"    \ 'do': 'bash install.sh',
+"    \ }
+Plug 'hrsh7th/nvim-compe'
+"Plug  'ncm2/ncm2'
+"Plug  'roxma/nvim-yarp'
+"Plug  'ncm2/ncm2-bufword'
+"Plug  'ncm2/ncm2-tmux'
+"Plug  'ncm2/ncm2-path'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'zchee/deoplete-jedi'
 "Plug 'racer-rust/vim-racer'
@@ -45,6 +47,7 @@ Plug 'rust-lang/rust.vim'
 "Plugin 'hdima/python-syntax'
 "Plugin 'tmhedberg/SimpylFold'
 "Plugin 'hynek/vim-python-pep8-indent'
+Plug 'snakemake/snakemake', {'rtp': 'misc/vim'}
 
 call plug#end()
 
@@ -68,7 +71,7 @@ else
     set shell=bash
 endif
 
-set timeoutlen=500  " Use short command timeout.
+"set timeoutlen=500  " Use short command timeout.
 
 set ignorecase  " Ignore case when searching.
 set smartcase   " Override 'ignorecase' when needed.
@@ -76,6 +79,34 @@ set hlsearch    " Highlight search results.
 
 " -----}}}
 " Plugin Settings -----{{{1
+
+" Required by compe
+set completeopt=menuone,noselect
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:true
+let g:compe.debug = v:false
+let g:compe.min_length = 1
+let g:compe.preselect = 'enable'
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.resolve_timeout = 800
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width = 100
+let g:compe.max_kind_width = 100
+let g:compe.max_menu_width = 100
+let g:compe.documentation = v:true
+
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.calc = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
+let g:compe.source.vsnip = v:true
+let g:compe.source.ultisnips = v:true
+let g:compe.source.luasnip = v:true
+let g:compe.source.emoji = v:true
 
 " Don't try to unzip zip files.
 let g:loaded_zipPlugin = 1
@@ -87,15 +118,27 @@ let g:loaded_zip = 1
 
 " Logs stored in /tmp/Language*
 "let g:LanguageClient_loggingLevel = 'DEBUG'
-let g:LanguageClient_serverCommands = {
-    \ 'python': ['python', '-m', 'pyls'],
-    \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ }
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_rootMarkers = {
-    \ 'rust': ['Cargo.toml'],
-    \ }
+"let g:LanguageClient_serverCommands = {
+"    \ 'python': ['python', '-m', 'pyls'],
+"    \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
+"    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+"    \ }
+"let g:LanguageClient_autoStart = 1
+"let g:LanguageClient_rootMarkers = {
+"    \ 'rust': ['Cargo.toml'],
+"    \ }
+
+lua << EOF
+nvim_lsp = require('lspconfig')
+
+nvim_lsp.r_language_server.setup{
+  settings = {
+    diagnostics = false
+  }
+}
+
+
+EOF
 
 " Restore minimized windows on entry.
 let g:maximizer_restore_on_winleave = 1
@@ -170,14 +213,16 @@ nnoremap ; .
 nnoremap Q @q
 
 " Remap arrow keys to nav keys in normal/visual mode.
-noremap <left> <home>
-noremap <right> <end>
-noremap <up> <pageup>
-noremap <down> <pagedown>
+"noremap <left> <home>
+"noremap <right> <end>
+"noremap <up> <pageup>
+"noremap <down> <pagedown>
 
 " Move up and down screen lines, not file lines.
 nnoremap j gj
 nnoremap k gk
+nnoremap <down> gj
+nnoremap <up> gk
 
 " Make <c-w> work in terminal insert mode.
 tnoremap <c-w> <c-\><c-n><c-w>
@@ -195,35 +240,37 @@ cabbrev w!! w !sudo tee > /dev/null %
 
 " Make :Wq act like :wq, etc...
 if has("user_commands")
-    command -bang -nargs=? -complete=file E e<bang> <args>
-    command -bang -nargs=? -complete=file W w<bang> <args>
-    command -bang -nargs=? -complete=file Wq wq<bang> <args>
-    command -bang -nargs=? -complete=file WQ wq<bang> <args>
-    command -bang Wa wa<bang>
-    command -bang WA wa<bang>
-    command -bang Q q<bang>
-    command -bang QA qa<bang>
-    command -bang Qa qa<bang>
+    command! -bang -nargs=? -complete=file E e<bang> <args>
+    command! -bang -nargs=? -complete=file W w<bang> <args>
+    command! -bang -nargs=? -complete=file Wq wq<bang> <args>
+    command! -bang -nargs=? -complete=file WQ wq<bang> <args>
+    command! -bang Wa wa<bang>
+    command! -bang WA wa<bang>
+    command! -bang Q q<bang>
+    command! -bang QA qa<bang>
+    command! -bang Qa qa<bang>
 endif
 " -----}}}
 " Leader Mappings -----{{{1
 
-" Set <leader> to \ and <localleader> to \\
-let mapleader = "\\"
-let maplocalleader = "\\\\"
+" Set <leader> to s and <localleader> to ss
+noremap s <nop>
+noremap S <nop>
+let mapleader = "s"
+let maplocalleader = "S"
 
 " Shortcuts for editing $MYVIMRC.
-nnoremap <leader>ev :split $MYVIMRC<cr>
-nnoremap <leader>wv :wq<cr>:source $MYVIMRC<cr> 
+nnoremap <leader>ve :split $MYVIMRC<cr>
+nnoremap <leader>vs :w<cr>:source $MYVIMRC<cr> 
 
 " Copy to, delete to, and paste from clipboard.
 vnoremap  <leader>y   "+y
 nnoremap  <leader>y   "+y
-nnoremap  <leader>Y   "+y$
+nnoremap  <leader>yy  "+y$
 
 vnoremap  <leader>d   "+d
 nnoremap  <leader>d   "+d
-nnoremap  <leader>D   "+d$
+nnoremap  <leader>dd  "+d$
 
 nnoremap  <leader>p   "+p
 vnoremap  <leader>p   "+p
@@ -231,7 +278,7 @@ nnoremap  <leader>P   "+P
 vnoremap  <leader>P   "+P
 
 " Shortcut for spellchecker.
-nnoremap <leader>s :set invspell <cr>
+nnoremap <leader>sp :set invspell <cr>
 
 " Shortcut for REPLize.
 "nnoremap <leader>o :call REPLize()<cr>
@@ -246,6 +293,11 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " Tab is tab unless popup menu is open.
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Send line or selection to another tmux pane.
+nnoremap <leader><return> :VtrSendLinesToRunner<cr>j
+vnoremap <leader><return> :VtrSendLinesToRunner<cr>`>j
+nnoremap <leader><tab> :VtrAttachToPane<cr>
 
 " Make <tab> trigger deoplete.
 "inoremap <silent><expr> <tab>
@@ -279,10 +331,10 @@ vnoremap <F1> <esc>
 " -----}}}
 " Autocommands -----{{{1
 
-augroup ncm2
-  autocmd!
-  autocmd BufEnter  *  call ncm2#enable_for_buffer()
-augroup END
+"augroup ncm2
+"  autocmd!
+"  autocmd BufEnter  *  call ncm2#enable_for_buffer()
+"augroup END
 
 augroup C
   autocmd!
@@ -304,10 +356,10 @@ augroup END
 
 augroup R
   autocmd!
-  autocmd FileType r
-    \ noremap <buffer><silent> <localleader>r :call StartR("R")<cr>
-  autocmd FileType r
-    \ noremap <buffer><silent> <localleader>l :call SendLineToR("down")<cr>
+  "autocmd FileType r
+  "  \ noremap <buffer><silent> <localleader>r :call StartR("R")<cr>
+  "autocmd FileType r
+  "  \ noremap <buffer><silent> <localleader>l :call SendLineToR("down")<cr>
   "autocmd FileType r setlocal omnifunc=LanguageClient#complete
 augroup END
 
@@ -335,6 +387,16 @@ augroup yaml
     autocmd FileType yaml :setlocal indentexpr&
 augroup END
 
+augroup graphviz
+  autocmd!
+  autocmd BufNewFile,BufRead *.gv :setlocal filetype=dot
+augroup END
+
+augroup bugs
+  autocmd!
+  autocmd BufNewFile,BufRead *.bug :setlocal filetype=r
+augroup END
+
 " make Esc happen without waiting for timeoutlen
 " fixes Powerline delay
 augroup fast_escape
@@ -349,7 +411,6 @@ augroup term_insert
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
 augroup END
-
 " -----}}}
 
 " Indenting & Wrapping -----{{{1
