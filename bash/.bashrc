@@ -47,7 +47,8 @@ alias r='R --quiet --no-save'
 alias rbuild='R CMD build'
 alias rinstall='R CMD INSTALL'
 
-alias ls='ls -h --group-directories-first --color=auto'
+alias ls='exa --icons --group-directories-first --sort=extension'
+alias ll='ls --long'
 
 alias grep='grep -n --color=auto'
 
