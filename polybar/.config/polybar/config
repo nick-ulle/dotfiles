@@ -48,7 +48,7 @@ module-margin-right = 0
 ;font-0 = "Hack Nerd Font:size=20;4"
 font-0 = "Hack Nerd Font:size=12;4"
 
-modules-left = desktops terminal web settings
+modules-left = desktops terminal web settings pulse
 modules-right = wireless-network battery audio ram date time
 
 tray-position = ${env:TRAY_POSITION:center}

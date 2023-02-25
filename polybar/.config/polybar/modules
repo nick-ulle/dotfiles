@@ -23,6 +23,13 @@ click-left = cinnamon-settings &
 
 content-padding = 1
 
+[module/pulse]
+type = custom/text
+content = ""
+click-left = pavucontrol &
+
+content-padding = 1
+
 [module/wireless-network]
 type = internal/network
 interface = wlan0
