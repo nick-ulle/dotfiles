@@ -27,6 +27,9 @@ eval $(dircolors -b $TTY_DIRCOLORS)
 # Aliases
 # =======
 
+alias du='du --human-readable --max-depth 1'
+alias df='df --human-readable --exclude-type tmpfs'
+
 alias ssh='TERM=xterm-256color ssh'
 alias mm='micromamba'
 
