@@ -5,8 +5,19 @@
 # file if .bash_profile is found.
 
 
+# Exit early if this script already ran.
+if [ "$PROFILE_EXECUTED" = true ]; then
+  # From <https://stackoverflow.com/a/52012684/1166039>:
+  return 0 2>/dev/null || exit 0
+fi
+export PROFILE_EXECUTED="true"
+
+
 # Path
 # ====
+# Make PATH an environment variable if it's not already.
+export PATH
+
 # Add local bin to the path.
 PATH="${HOME}/.local/bin:${PATH}"
 
@@ -24,8 +35,6 @@ export INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:${INFOPATH}"
 # Add Cargo to the path.
 PATH="${HOME}/.cargo/bin:${PATH}"
 
-# Make this an environment variable.
-export PATH
 
 
 # XDG Basedir Support
