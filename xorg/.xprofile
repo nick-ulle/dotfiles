@@ -5,8 +5,9 @@
 # This file is executed on DM login, regardless of the selected session.
 
 
-# Most DMs don't run TTY login scripts by default, so do that here.
-[[ -r ~/.bash_profile ]] && source ~/.bash_profile
+# Most DMs don't run TTY login scripts by default, but SDDM does, so for now
+# keep this line commented out:
+#[[ -r ~/.bash_profile ]] && source ~/.bash_profile
 
 
 # Keyboard Settings
