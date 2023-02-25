@@ -31,6 +31,12 @@ alias du='du --human-readable --max-depth 1'
 alias df='df --human-readable --exclude-type tmpfs'
 
 alias ssh='TERM=xterm-256color ssh'
+alias vpn='sudo openconnect --user=nulle --force-dpd=240'`
+  `' --protocol=pulse staff.vpn.library.ucdavis.edu'
+alias vpn-library='sudo openconnect --user=nulle --force-dpd=240'`
+  `' --protocol=pulse vpn.library.ucdavis.edu'
+alias vpn-ucdh='sudo openconnect --user=nulle'`
+  `' --protocol=anyconnect connect.ucdmc.ucdavis.edu'
 
 # This function creates an SSH tunnel (e.g., for JupyterLab).
 function ssht {
