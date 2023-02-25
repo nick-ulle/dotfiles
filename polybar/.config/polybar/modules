@@ -5,7 +5,7 @@
 [module/terminal]
 type = custom/text
 content = ""
-click-left = st -e tmux new-session &
+click-left = st -f 'Hack Nerd Font:pixelsize=18' -e run_tmux &
 
 content-padding = 1
 

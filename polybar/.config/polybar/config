@@ -6,6 +6,7 @@ include-file = ~/.config/polybar/modules
 include-file = ~/.config/polybar/$WINDOW_MANAGER
 
 [colors]
+; Atelier Forest Colors
 red = #88f22c40
 blue = #88407ee7
 green = #885ab738
