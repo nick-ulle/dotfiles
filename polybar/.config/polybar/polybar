@@ -22,7 +22,7 @@
   # Place tray on HDMI-2 if available, otherwise eDP-1.
   tray_output='eDP-1'
   for m in $monitors; do
-    if [[ $m == "HDMI-2" ]]; then
+    if [[ $m == "HDMI-2" || $m == "DP-1" ]]; then
       tray_output=$m
     fi
   done
