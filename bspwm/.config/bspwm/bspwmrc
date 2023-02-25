@@ -46,11 +46,21 @@ fi
 bspc rule --add Zathura state=tiled
 bspc rule --add Soffice state=tiled # Workaround for issue #655
 
+bspc rule --add 'Gscreenshot' state=floating
+
 #bspc rule --add zoom state=floating center=true rectangle=2560x1440+0+0
-bspc rule --add zoom:zoom desktop=D7 state=floating center=true \
+bspc rule --add *:*:'Zoom Meeting' desktop=D7 state=floating center=on \
+  rectangle=1728x824+0+0
+  #rectangle=1280x720+0+0
+
+bspc rule --add 'zoom' desktop=D7 state=floating center=on \
   rectangle=1728x824+0+0
   #rectangle=1280x720+0+0
 
 # Make Firefox pop-out video float in bottom right corner.
 bspc rule --add firefox:Toolkit state=floating sticky=on \
   rectangle=320x180+1584+852
+
+# Float Zotero selector bar.
+bspc rule --add Zotero:*:'Quick Format Citation' state=floating center=on \
+  follow=on
