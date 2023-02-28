@@ -28,7 +28,7 @@ autocmd({"BufNewFile", "BufRead"}, {
 
 -- Enable spell-checking for text formats.
 autocmd({"FileType"}, {
-  pattern = {"text", "markdown", "rmd"},
+  pattern = {"text", "markdown", "rmd", "gitcommit"},
   group = augroup("spell", {clear = true}),
   callback = function()
     optl.spell = true
