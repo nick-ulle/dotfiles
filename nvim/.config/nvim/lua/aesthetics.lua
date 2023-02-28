@@ -3,7 +3,7 @@ local opt = vim.opt
 
 
 -- Shade the column after `textwidth`.
-opt.colorcolumn = tostring(vim.o.textwidth + 1)
+opt.colorcolumn = "+1"
 
 -- Highlight line with cursor.
 opt.cursorline = true

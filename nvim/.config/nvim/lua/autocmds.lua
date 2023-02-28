@@ -54,6 +54,5 @@ autocmd({"FileType"}, {
   group = augroup("git", {clear = true}),
   callback = function()
     optl.textwidth = 72
-    optl.colorcolumn = "73"
   end
 })
