@@ -1,7 +1,9 @@
-
 local optl = vim.opt_local
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+
+-- Clear all autocommands.
+vim.cmd("autocmd!")
 
 
 -- Treat .Rprofile files as R files.

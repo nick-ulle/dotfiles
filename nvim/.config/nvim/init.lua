@@ -1,7 +1,10 @@
-require("base")
-require("highlights")
-require("maps")
-require("autocmd")
+-- See also:
+--    * `:help lua` or <https://neovim.io/doc/user/lua.html>
+--    * `:help lua-guide` or <https://neovim.io/doc/user/lua-guide.html>
+require("options")
+require("aesthetics")
+require("keymaps")
+require("autocmds")
 
 local has = function(x)
   return vim.fn.has(x) == 1
