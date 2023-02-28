@@ -29,7 +29,20 @@ local config_lspconfig = function()
   }
 
   -- Python
-  lsp.pylsp.setup {}
+  lsp.pylsp.setup {
+    settings = {
+      pylsp = {
+        plugins = {
+          pycodestyle = {
+            ignore = {
+              "E203",   -- whitespace before `:` (and also `,`?)
+              "E251",   -- spaces around parameter equals
+            }
+          }
+        }
+      }
+    }
+  }
 end
 
 return {
