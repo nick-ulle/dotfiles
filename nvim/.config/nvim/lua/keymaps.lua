@@ -1,6 +1,6 @@
 local keymap = vim.keymap
 
--- Set <leader> to s and <localleader> to ss.
+-- Set <leader> to s and <localleader> to S.
 keymap.set("", "s", "<nop>")
 keymap.set("", "S", "<nop>")
 vim.g.mapleader = "s"
@@ -24,6 +24,5 @@ keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
 
 -- Select all.
-keymap.set("n", "va", "ggVG")
-keymap.set("v", "a", "<esc>ggVG")
+keymap.set("v", "aa", "<esc>ggVG")
 
