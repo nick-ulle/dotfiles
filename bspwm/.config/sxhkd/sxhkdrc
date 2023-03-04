@@ -1,14 +1,13 @@
 
 # Restart sxhkd.
 super + BackSpace
-	pkill -USR1 -x sxhkd
+  pkill -USR1 -x sxhkd
 
 # --- Desktops {{{
 
 # Focus desktop or send to desktop.
-
 super + {_,shift + }{grave,1-6}
-	bspc {desktop --focus,node -d} '^{7,1-6}'
+  bspc {desktop --focus,node -d} '^{7,1-6}'
 
 # --- }}}
 
@@ -16,10 +15,10 @@ super + {_,shift + }{grave,1-6}
 
 # Focus windows.
 super + {h,j,k,l}
-	bspc node --focus {west,south,north,east}
+  bspc node --focus {west,south,north,east}
 
 super + {Left,Down,Up,Right}
-	bspc node --focus {west,south,north,east}
+  bspc node --focus {west,south,north,east}
 
 
 # Reorient windows.
@@ -104,10 +103,12 @@ super + {_,shift + }Delete
   cinnamon-session-quit{_, --power-off}
 
 super + {_,shift + }Escape
-  cinnamon-screensaver-command --lock {_, && systemctl suspend}
+  {betterlockscreen --lock dim, systemctl suspend}
+#  cinnamon-screensaver-command --lock {_, && systemctl suspend}
 
 XF86Sleep
-  cinnamon-screensaver-command --lock && systemctl suspend
+  systemctl suspend
+#  cinnamon-screensaver-command --lock && systemctl suspend
 
 XF86PowerOff
   cinnamon-session-quit --power-off
@@ -124,16 +125,26 @@ super + a
 
 # Also looks good with -sb #df5320.
 super + r
-  dmenu_run -b -x 250 -w 650 -h 32 -fn HackNerdFont-12 \
-  -nf "#fff" -sf "#fff" -nb "#1b1918" -sb "#6666ea" -p ">_ " \
-  -o 1.0 #-dim 0.8 -dc "#1b1918"
+  bemenu-run --bottom --prompt " " \
+  --tf "#FFFFFF" --tb "#6666EAFF" \
+  --ff "#FFFFFF" --fb "#1B1918FF" \
+  --nf "#888888" --nb "#1B1918FF" \
+  --af "#888888" --ab "#1B1918FF" \
+  --hf "#FFFFFF" --hb "#6666EAFF" \
+  --fn "Hack Nerd Font" 12 --ch 19 \
+  --line-height 32 --hp 16 # horizontal padding
+#  \ -H 32 -fn HackNerdFont-12 \
+#  -o 1.0 #-dim 0.8 -dc "#1b1918"
+#  dmenu_run -b -x 250 -w 650 -h 32 -fn HackNerdFont-12 \
+#  -nf "#fff" -sf "#fff" -nb "#1b1918" -sb "#6666ea" -p ">_ " \
+#  -o 1.0 #-dim 0.8 -dc "#1b1918"
 #  dmenu_run -b -x 395 -w 1000 -h 48 -fn HackNerdFont-12 \
 #  -nf "#fff" -sf "#fff" -nb "#1b1918" -sb "#6666ea" -p ">_ " \
 #  -o 1.0 #-dim 0.8 -dc "#1b1918"
 
 super + {c,C}
-#  st{_, -f 'Hack Nerd Font:pixelsize=50'} -e tmux new-session
-  st -f 'Hack Nerd Font:pixelsize={18,30}' -e tmux new-session
+#  st{_, -f 'Hack Nerd Font:pixelsize=50'} -e run_tmux
+  {st -f 'Hack Nerd Font:pixelsize=18' -e,wezterm start --} bash -ic tmux
 
 super + {n,N}
   {firefox,chromium}
