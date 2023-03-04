@@ -39,3 +39,16 @@ opt.inccommand = "split"
 opt.ignorecase = true
 opt.smartcase = true
 
+-- See `:help ft-python-indent`.
+-- Indent continuations 4 spaces in Python.
+vim.g.python_indent = {
+  disable_parentheses_indenting = false,
+  closed_paren_align_last_line = false,
+  continue = 4,
+  open_paren = 4,
+  nested_paren = 4,
+}
+
+-- See `:help ft-r-indent`.
+-- Don't align function arguments in R.
+vim.g.r_indent_align_args = 0
