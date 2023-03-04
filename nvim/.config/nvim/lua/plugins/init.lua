@@ -53,8 +53,8 @@ return {
     opts = {},
   },
 
-  "ntpeters/vim-better-whitespace",
   -- Vimscript plugins
+  "ntpeters/vim-better-whitespace",
   {
     "junegunn/vim-easy-align",
     config = function()
