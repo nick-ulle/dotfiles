@@ -17,8 +17,15 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 PS1='\u \[\e[0;34m\]\W\[\e[m\] \$ '
 
 # Set Base16 shell colors.
-BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-solarized-dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+#BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-solarized-dark.sh"
+#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+BASE16_SHELL="$HOME/.config/base16-shell/"
+if [ -s "$BASE16_SHELL/profile_helper.sh" ]; then
+# #  # The script exists, so evaluate it.
+  source "$BASE16_SHELL/profile_helper.sh"
+fi
+
+base16_catppuccin-frappe
 
 # Enable filetype-specific colors for ls.
 eval $(dircolors -b $TTY_DIRCOLORS)
@@ -79,8 +86,7 @@ alias .todo='nvim ~/TODO.md'
 
 # This function forks a process.
 function fork {
-  if [ -n "$1" ]
-  then
+  if [ -n "$1" ]; then
     setsid "$@" &> /dev/null
   fi
 }
