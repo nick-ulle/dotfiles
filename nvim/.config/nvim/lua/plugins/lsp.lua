@@ -3,10 +3,11 @@ local config_lspconfig = function()
 
   -- Lua
   lsp.lua_ls.setup {
+    before_init = require("neodev.lsp").before_init,
     settings = {
       Lua = {
       }
-    }
+    },
   }
 
   -- R
@@ -51,7 +52,7 @@ return {
     "folke/neodev.nvim",
     name = "neodev",
     opts = {
-      setup_jsonls = true
+      setup_jsonls = true,
     },
   },
   {
