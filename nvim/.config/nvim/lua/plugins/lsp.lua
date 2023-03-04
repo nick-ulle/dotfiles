@@ -5,14 +5,6 @@ local config_lspconfig = function()
   lsp.lua_ls.setup {
     settings = {
       Lua = {
-        diagnostics = {
-          -- Make the LS recognize the `vim` global.
-          globals = { "vim" }
-        },
-        workspace = {
-          -- Make the LS aware of the Neovim API.
-          library = vim.api.nvim_get_runtime_file("", true)
-        }
       }
     }
   }
@@ -35,27 +27,53 @@ local config_lspconfig = function()
         plugins = {
           pycodestyle = {
             ignore = {
-              "E203",   -- whitespace before `:` (and also `,`?)
-              "E251",   -- spaces around parameter equals
+              "E203", -- whitespace before `:` (and also `,`?)
+              "E251", -- spaces around parameter equals
             }
           }
         }
       }
     }
   }
+
+  -- Julia
+  lsp.julials.setup {}
+
+  -- Bash
+  lsp.bashls.setup {}
+
+  -- JSON
+  lsp.jsonls.setup {}
 end
 
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = {"williamboman/mason.nvim"},
+    "folke/neodev.nvim",
+    name = "neodev",
     opts = {
-      ensure_installed = {"lua_ls"},
+      setup_jsonls = true
+    },
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      ensure_installed = {
+        "lua_ls",
+        "bashls",
+        "jsonls",
+        "julials",
+        "pylsp",
+        "r_language_server",
+      },
     }
   },
   {
     "neovim/nvim-lspconfig",
-    dependencies = {"williamboman/mason-lspconfig.nvim"},
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      { "folke/neodev.nvim", name = "neodev", lazy = false },
+    },
     config = config_lspconfig
   },
 }
