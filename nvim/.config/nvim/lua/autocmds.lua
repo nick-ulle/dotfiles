@@ -37,6 +37,25 @@ autocmd({"FileType"}, {
 })
 
 
+-- Set formatoptions for all buffers.
+-- Necessary because some naughty ftplugins override formatoptions.
+autocmd({"VimEnter", "FileType"}, {
+  pattern = "*",
+  group = augroup("formatoptions", {clear = true}),
+  callback = function()
+    optl.formatoptions:append("cjnrt")
+      -- `c`  auto-wrap comments
+      -- `j`  remove comment leader when joining comment lines
+      -- `n`  smart handling of numbered lists
+      -- `r`  continue comments on new lines in insert mode
+      -- `t`  auto-wrap text
+    optl.formatoptions:remove({"l", "o"})
+      -- `l`  prevent long lines from being broken in insert mode
+      -- `o`  continue comments on new lines with `o` in normal mode
+    end
+})
+
+
 -- Python
 autocmd({"FileType"}, {
   pattern = "python",

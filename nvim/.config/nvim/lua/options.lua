@@ -39,17 +39,3 @@ opt.inccommand = "split"
 opt.ignorecase = true
 opt.smartcase = true
 
--- Formatting
---
--- Defaults to `tcqj`.
-opt.formatoptions:append("rn")
--- `r`  continue comments on new lines in insert mode
--- `n`  smart handling of numbered lists
-
--- TODO: probably nice to have in Markdown docs
--- `a`  automatically reformat (`gq`) paragraphs in comments
--- `w`  trailing whitespace indicates continued paragraph
-
-opt.formatoptions:remove("lo")
--- `l`  prevents long lines from being broken in insert mode
--- `o` continues comments on new lines with `o` in normal mode
