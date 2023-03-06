@@ -73,7 +73,7 @@ alias rbuild='R CMD build'
 alias rinstall='R CMD INSTALL'
 
 alias ls='exa --icons --group-directories-first --sort=extension'
-alias ll='ls --long'
+alias ll='ls --long --classify'
 
 alias grep='grep -n --color=auto'
 
