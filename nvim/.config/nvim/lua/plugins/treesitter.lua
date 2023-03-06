@@ -39,14 +39,40 @@ return {
             enable = true,
             lookahead = true,
             keymaps = {
-              ["if"] = "@function.inner",
-              ["af"] = "@function.outer",
-              [","] = "@parameter.inner",
-              ["a,"] = "@parameter.outer",
+              ["if"] = {
+                query = "@function.inner", desc = "inner function"
+              },
+              ["af"] = {
+                query = "@function.outer", desc = "around function"
+              },
+              ["i,"] = {
+                query = "@parameter.inner", desc = "inner parameter"
+              },
+              ["a,"] = {
+                query = "@parameter.outer", desc = "around parameter"
+              },
+              ["a="] = {
+                query = "@assignment.outer", desc = "around assignment"
+              },
+              ["i="] = {
+                query = "@assignment.inner", desc = "inner assignment"
+              },
+              ["ac"] = {
+                query = "@comment.outer", desc = "around comment"
+              },
+              ["ic"] = {
+                query = "@comment.inner", desc = "inner comment"
+              },
             }
           },
           move = {},
         }
+      })
+      vim.keymap.set("o", ",", "i,", {
+        remap = true, desc = "Inner parameter"
+      })
+      vim.keymap.set("o", "=", "i=", {
+        remap = true, desc = "Inner assignment"
       })
     end
   },

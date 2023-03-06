@@ -42,8 +42,12 @@ return {
     opts = {},
     config = function(plugin, opts)
       require(plugin.name).setup(opts)
-      vim.keymap.set("n", "<leader>c", "gcc", { remap = true })
-      vim.keymap.set("v", "<leader>c", "gc", { remap = true })
+      vim.keymap.set("n", "<leader>t", "gcc", {
+        remap = true, desc = "Toggle line comment"
+      })
+      vim.keymap.set("v", "<leader>t", "gc", {
+        remap = true, desc = "Toggle line comment"
+      })
     end
   },
   {
@@ -58,7 +62,9 @@ return {
   {
     "junegunn/vim-easy-align",
     config = function()
-      vim.keymap.set({"n", "x"}, "ga", "<Plug>(EasyAlign)")
+      vim.keymap.set({"n", "x"}, "ga", "<Plug>(EasyAlign)", {
+        desc = "Activate EasyAlign"
+      })
     end
   },
   --"mfussenegger/nvim-dap"
