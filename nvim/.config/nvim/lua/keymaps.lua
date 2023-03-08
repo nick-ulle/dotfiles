@@ -38,7 +38,8 @@ end
 -- FIXME: Seems to break on multibyte characters.
 local keys_select_cursor_column = function()
   local r1 = vim.fn.line("v")
-  local _, r2, c, _ = unpack(vim.fn.getpos("."))
+  local r2 = vim.fn.line(".")
+  local c = vim.fn.charcol(".")
   if r1 > r2 then
     r1, r2 = r2, r1
   end
