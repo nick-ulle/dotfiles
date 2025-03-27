@@ -2,6 +2,7 @@
 [user]
 	name = Nick Ulle
 	email = nick.ulle@gmail.com
+	signingkey = /home/nick/.ssh/zen.pub
 [core]
 	editor = nvim
 [init]
@@ -38,3 +39,9 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
