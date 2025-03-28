@@ -100,11 +100,11 @@ super + w : {Down,Up}
 # --- Session {{{
 
 super + {_,shift + }Delete
-  cinnamon-session-quit{_, --power-off}
+  cinnamon-session-quit{ --logout, --power-off}
 
 super + {_,shift + }Escape
-  {betterlockscreen --lock dim, systemctl suspend}
-#  cinnamon-screensaver-command --lock {_, && systemctl suspend}
+#  {betterlockscreen --lock dim, systemctl suspend}
+  cinnamon-screensaver-command --lock {_, && systemctl suspend}
 
 XF86Sleep
   systemctl suspend
