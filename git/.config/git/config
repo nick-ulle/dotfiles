@@ -31,6 +31,8 @@
 	stage = add
 	staged = diff --staged
 	unstage = reset HEAD --
+# Print path to top level of repository.
+	root = rev-parse --show-toplevel
 	permission-reset = !git diff -p -R --no-ext-diff --no-color | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply
 
 [filter "lfs"]
