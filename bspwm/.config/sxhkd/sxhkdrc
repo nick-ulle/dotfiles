@@ -114,7 +114,10 @@ XF86PowerOff
   cinnamon-session-quit --power-off
 
 XF86Audio{Mute,LowerVolume,RaiseVolume}
-  amixer set Master {toggle,4%-,4%+}
+  wpctl set-{\
+    mute @DEFAULT_AUDIO_SINK@ toggle,\
+    volume @DEFAULT_AUDIO_SINK@ 4%-,\
+    volume -l 1.0 @DEFAULT_AUDIO_SINK@ 4%+}
 
 super + a
   pulse_toggle
