@@ -146,8 +146,7 @@ super + r
 #  -o 1.0 #-dim 0.8 -dc "#1b1918"
 
 super + {c,C}
-#  st{_, -f 'Hack Nerd Font:pixelsize=50'} -e run_tmux
-  {st -f 'Hack Nerd Font:pixelsize=18' -e,wezterm start --} bash -ic tmux
+  wezterm start -- bash -i{ -c tmux, }
 
 super + {n,N}
   {firefox,chromium}
