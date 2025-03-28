@@ -33,6 +33,10 @@
 	unstage = reset HEAD --
 # Print path to top level of repository.
 	root = rev-parse --show-toplevel
+# Show a file's first commit.
+	origin = log --follow --diff-filter=A --
+# Print a file's authors.
+	authors = shortlog --numbered --summary --
 	permission-reset = !git diff -p -R --no-ext-diff --no-color | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply
 
 [filter "lfs"]
