@@ -17,7 +17,11 @@ config =  {
         key = "F2",
         mods = "SHIFT"
       }
-    }
+    },
+    -- paste from the clipboard
+    {
+      key = 'V', mods = 'CTRL', action = wt.action.PasteFrom 'Clipboard'
+    },
   },
 
   enable_tab_bar = false,
