@@ -41,6 +41,11 @@ config =  {
     right = 4,
     left = 4,
   },
+
+  colors = {
+    cursor_bg = "#ca9ee6",
+    cursor_border = "#8caaee",
+  },
 }
 
 return config
