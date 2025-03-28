@@ -1,8 +1,11 @@
 local wt = require("wezterm")
 
-return {
+config =  {
   font = wt.font("Hack Nerd Font"),
   font_size = 13.3,
+  -- font_size = 20,
+  -- font_size = 22,
+  -- font_size = 28,
 
   disable_default_key_bindings = true,
   --debug_key_events = true,
@@ -39,3 +42,5 @@ return {
     left = 4,
   },
 }
+
+return config
