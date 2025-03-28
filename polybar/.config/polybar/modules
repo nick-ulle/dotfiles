@@ -5,7 +5,7 @@
 [module/terminal]
 type = custom/text
 content = ""
-click-left = st -f 'Hack Nerd Font:pixelsize=18' -e run_tmux &
+click-left = wezterm start -- bash -ic tmux
 
 content-padding = 1
 
