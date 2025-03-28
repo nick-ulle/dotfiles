@@ -23,6 +23,8 @@ setxkbmap -option 'compose:ralt'
 # /usr/share/X11/xkb/symbols/pc
 #
 # (Just set key <CAPS> to F14)
+#
+# Then reboot or run `setxkbmap -layout us`
 
 
 # Display Settings
