@@ -62,7 +62,7 @@ label-muted = "  Mute"
 
 [module/ram]
 type = internal/memory
-interval = 30
+interval = 5
 label = "  %gb_used%"
 
 [module/date]
