@@ -30,7 +30,7 @@
 	ls = log --graph --oneline --all -5
 	stage = add
 	staged = diff --staged
-	unstage = reset HEAD --
+	unstage = reset --
 # Print path to top level of repository.
 	root = rev-parse --show-toplevel
 # Show a file's first commit.
