@@ -76,3 +76,7 @@ bspc rule --add firefox:Toolkit state=floating sticky=on \
 # Float Zotero selector bar.
 bspc rule --add Zotero:*:'Quick Format Citation' state=floating center=on \
   follow=on
+
+# Display R and Matplotlib plot windows in bottom right quadrant.
+bspc rule --add R_x11 state=floating rectangle=948x522+964+518
+bspc rule --add matplotlib state=floating rectangle=948x522+964+518
