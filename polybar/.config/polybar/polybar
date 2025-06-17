@@ -11,28 +11,28 @@
   # Wait until the processes have been shut down.
   while pgrep -u $UID -x polybar > /dev/null; do sleep 0.5; done
 
-  if [[ $(wmctrl -m | head -n 1 | cut -d " " -f 2 ) == "i3" ]]; then
-    export WINDOW_MANAGER=i3
+  if [[ $(wmctrl -m | head -n 1 | cut -d " " -f 2 ) == 'i3' ]]; then
+    export WINDOW_MANAGER='i3'
   else
-    export WINDOW_MANAGER=bspwm
+    export WINDOW_MANAGER='bspwm'
   fi
 
-  monitors=$(xrandr --query | rg " connected" | cut -d" " -f1)
+  monitors=$(xrandr --query | rg ' connected' | cut -d' ' -f1)
 
   # Place tray on HDMI-2 if available, otherwise eDP-1.
   tray_output='eDP-1'
   for m in $monitors; do
-    if [[ $m == "HDMI-2" || $m == "DP-1" ]]; then
+    if [[ $m == 'HDMI-2' || $m == 'DP-1' ]]; then
       tray_output=$m
     fi
   done
 
   # Launch or reload polybar on each monitor.
   for m in $monitors; do
-    export MONITOR=$m
-    export TRAY_POSITION=none
+    export POLYBAR_MONITOR=$m
+    export POLYBAR_TRAY=''
     if [[ $m == $tray_output ]]; then
-      TRAY_POSITION=center
+      POLYBAR_TRAY='tray'
     fi
 
     # Launch bar.

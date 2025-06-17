@@ -28,7 +28,7 @@ throttle-input-for = 30
 format-padding = 2
 
 [bar/main]
-monitor = ${env:MONITOR:eDP-1}
+monitor = ${env:POLYBAR_MONITOR:eDP-1}
 bottom = true
 width = 100%
 ;height = 48
@@ -50,6 +50,7 @@ module-margin-right = 0
 font-0 = "Hack Nerd Font:size=12;4"
 
 modules-left = desktops terminal web settings pulse
+modules-center = ${env:POLYBAR_TRAY:}
 modules-right = wireless-network battery audio ram date time
 
-tray-position = ${env:TRAY_POSITION:center}
+;tray-position = ${env:TRAY_POSITION:center}

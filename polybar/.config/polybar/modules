@@ -30,6 +30,10 @@ click-left = pavucontrol &
 
 content-padding = 1
 
+[module/tray]
+type = "internal/tray"
+tray-size = 20
+
 [module/wireless-network]
 type = internal/network
 interface = wlan0
