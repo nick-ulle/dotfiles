@@ -2,3 +2,4 @@ git/.config/git/gitk
 nvim/.config/nvim/autoload/plug.vim.old
 nvim/.config/nvim/plugged
 nvim/.config/nvim/.netrwhist
+R/.config/R/library/
