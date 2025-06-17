@@ -34,11 +34,23 @@ bspc config pointer_follows_monitor true
 bspc config remove_unplugged_monitors true
 bspc config remove_disabled_monitors true
 
-if [ "$(bspc query -M | wc -l)" -eq "2" ]; then
-  bspc monitor HDMI-2 --reset-desktops D1 D2 D3 D4 D5 D6
-  bspc monitor eDP-1 --reset-desktops D7
-  bspc wm --reorder-monitors HDMI-2 eDP-1
-  bspc desktop --focus D1
+function contains {
+  echo "${1}" | grep --fixed-strings --line-regexp "${2}" > /dev/null
+  return $?
+}
+
+function bspc_dual_monitor_setup {
+    bspc monitor "${1}" --reset-desktops D1 D2 D3 D4 D5 D6
+    bspc monitor eDP-1 --reset-desktops D7
+    bspc wm --reorder-monitors "${1}" eDP-1
+    bspc desktop --focus D1
+}
+
+monitors=$(bspc query --monitors --names)
+if contains "$monitors" 'HDMI-2'; then
+  bspc_dual_monitor_setup 'HDMI-2'
+elif contains "$monitors" 'DP-1'; then
+  bspc_dual_monitor_setup 'DP-1'
 else
   bspc monitor eDP-1 --reset-desktops D1 D2 D3 D4 D5 D6 D7
 fi
