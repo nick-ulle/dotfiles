@@ -139,5 +139,9 @@ function xr {
 # zoxide init
 eval "$(zoxide init bash)"
 
+# starship init
+eval "$(starship init bash)"
+starship_precmd
+
 # Pixi autocompletion
 eval "$(pixi completion --shell bash)"
