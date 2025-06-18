@@ -63,6 +63,9 @@ function mma {
 
 alias mmd='micromamba deactivate'
 
+alias vi='nvim'
+alias vim='nvim'
+
 # This alias makes python use the IPython debugger.
 alias pdb="PYTHONBREAKPOINT='IPython.core.debugger.set_trace' python"
 alias jn='jupyter notebook'
