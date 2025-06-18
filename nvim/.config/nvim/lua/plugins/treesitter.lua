@@ -3,14 +3,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      local ts = require("nvim-treesitter.configs")
-      ts.setup({
-        auto_install = true,
+      local configs = require("nvim-treesitter.configs")
+      configs.setup({
         ensure_installed = {
           "c",
           "lua",
           "vim",
-          "help",
+          "vimdoc",
           -- Not core to neovim:
           "bash",
           "julia",
@@ -19,10 +18,10 @@ return {
           "python",
           "r",
         },
-        highlight = {
-          enable = true,
-          disable = {}
-        },
+        sync_install = false,
+        highlight = { enable = true },
+        -- Treesitter indentation is kind of broken right now, so disable it.
+        indent = { enable = false },
         --incremental_selection = {
         --  enable = true,
         --  keymaps = {
