@@ -8,26 +8,26 @@ contains() {
 }
 
 bspc_dual_monitor_setup() {
-    bspc monitor "${1}" --reset-desktops D1 D2 D3 D4 D5 D6
-    bspc monitor eDP-1 --reset-desktops D7
-    bspc wm --reorder-monitors "${1}" eDP-1
+    bspc monitor "${1}" --reset-desktops D7
+    bspc monitor eDP-1 --reset-desktops D1 D2 D3 D4 D5 D6
+    bspc wm --reorder-monitors eDP-1 "${1}"
     bspc desktop --focus D1
 }
 
 bspc_dual_monitor_switch() {
-  bspc desktop D1 --to-monitor "${1}"
-  bspc desktop D2 --to-monitor "${1}"
-  bspc desktop D3 --to-monitor "${1}"
-  bspc desktop D4 --to-monitor "${1}"
-  bspc desktop D5 --to-monitor "${1}"
-  bspc desktop D6 --to-monitor "${1}"
-  bspc desktop D7 --to-monitor eDP-1
+  bspc desktop D1 --to-monitor eDP-1
+  bspc desktop D2 --to-monitor eDP-1
+  bspc desktop D3 --to-monitor eDP-1
+  bspc desktop D4 --to-monitor eDP-1
+  bspc desktop D5 --to-monitor eDP-1
+  bspc desktop D6 --to-monitor eDP-1
+  bspc desktop D7 --to-monitor "${1}"
   bspc desktop Desktop --remove
   if [ "${1}" = 'eDP-1' ]; then
     bspc monitor eDP-1 --reorder-desktops D1 D2 D3 D4 D5 D6 D7
   else
-    bspc monitor "${1}" --reorder-desktops D1 D2 D3 D4 D5 D6
-    bspc wm --reorder-monitors "${1}" eDP-1
+    bspc monitor eDP-1 --reorder-desktops D1 D2 D3 D4 D5 D6
+    bspc wm --reorder-monitors eDP-1 "${1}"
     bspc desktop --focus D1
   fi
 }
