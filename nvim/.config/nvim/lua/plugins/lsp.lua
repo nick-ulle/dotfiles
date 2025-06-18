@@ -57,8 +57,8 @@ return {
     },
   },
   {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = { "mason-org/mason.nvim" },
     opts = {
       ensure_installed = {
         "lua_ls",
@@ -73,7 +73,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+      "mason-org/mason-lspconfig.nvim",
       { "folke/neodev.nvim", name = "neodev", lazy = false },
     },
     config = config_lspconfig
