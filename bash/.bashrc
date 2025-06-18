@@ -98,6 +98,14 @@ alias o='open'
 alias up='cd ..'
 alias back='cd ~-'
 
+function root {
+  local root
+  root=$(git rev-parse --show-toplevel)
+  if [[ $? -eq 0 ]]; then
+    cd $root
+  fi
+}
+
 # zoxide init
 eval "$(zoxide init bash)"
 
