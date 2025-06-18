@@ -34,9 +34,6 @@ eval $(dircolors -b $TTY_DIRCOLORS)
 # Aliases
 # =======
 
-alias du='du --human-readable --max-depth 1'
-alias df='df --human-readable --exclude-type tmpfs'
-
 alias ssh='TERM=xterm-256color ssh'
 alias vpn='sudo openconnect --user=nulle --force-dpd=240'`
   `' --protocol=pulse staff.vpn.library.ucdavis.edu'
@@ -75,8 +72,18 @@ alias r='R --quiet --no-save'
 alias rbuild='R CMD build'
 alias rinstall='R CMD INSTALL'
 
-alias ls='exa --icons --group-directories-first --sort=extension'
-alias ll='ls --long --classify'
+
+# System Aliases
+# ==============
+
+alias du='du --human-readable --max-depth 1'
+alias df='df --human-readable --exclude-type tmpfs'
+alias free='free --human'
+
+alias ls='eza --icons --group-directories-first --git --sort=extension --group'
+alias ll='ls -l --classify'
+
+alias fd='fd --no-ignore'
 
 alias grep='grep -n --color=auto'
 
