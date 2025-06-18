@@ -93,6 +93,7 @@ return {
         "pylsp",
         "r_language_server",
       },
+      automatic_enable = false,
     }
   },
   {
