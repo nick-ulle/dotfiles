@@ -1,8 +1,9 @@
 return {
   {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-      show_trailing_blankline_indent = false
-    }
-  },
+      "lukas-reineke/indent-blankline.nvim",
+      main = "ibl",
+      ---@module "ibl"
+      ---@type ibl.config
+      opts = {},
+  }
 }
