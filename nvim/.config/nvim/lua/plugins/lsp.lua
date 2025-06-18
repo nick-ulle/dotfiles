@@ -30,6 +30,7 @@ local config_lspconfig = function()
             ignore = {
               "E203", -- whitespace before `:` (and also `,`?)
               "E251", -- spaces around parameter equals
+              "W503", -- line break before binary operator
             }
           }
         }
