@@ -110,6 +110,10 @@ function root {
 
 alias mount-ntfs='sudo mount --options loop,uid=nick,gid=nick,fmask=0133,dmask=0022 --types ntfs3'
 
+
+# Initializations
+# ===============
+
 # zoxide init
 eval "$(zoxide init bash)"
 
