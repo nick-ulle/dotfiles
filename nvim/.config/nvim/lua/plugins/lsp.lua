@@ -2,13 +2,7 @@ local config_lspconfig = function()
   local lsp = require("lspconfig")
 
   -- Lua
-  lsp.lua_ls.setup {
-    before_init = require("neodev.lsp").before_init,
-    settings = {
-      Lua = {
-      }
-    },
-  }
+  lsp.lua_ls.setup {}
 
   -- R
   lsp.r_language_server.setup {
@@ -50,10 +44,14 @@ end
 
 return {
   {
-    "folke/neodev.nvim",
-    name = "neodev",
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
     opts = {
-      setup_jsonls = true,
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
     },
   },
   {
@@ -74,7 +72,6 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "mason-org/mason-lspconfig.nvim",
-      { "folke/neodev.nvim", name = "neodev", lazy = false },
     },
     config = config_lspconfig
   },
