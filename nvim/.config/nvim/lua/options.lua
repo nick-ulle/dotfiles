@@ -52,3 +52,9 @@ vim.g.python_indent = {
 -- See `:help ft-r-indent`.
 -- Don't align function arguments in R.
 vim.g.r_indent_align_args = 0
+
+-- Set up diagnostics (warnings/errors on code).
+vim.diagnostic.config({
+  virtual_lines = true,
+})
+vim.diagnostic.enable()
