@@ -98,44 +98,6 @@ alias o='open'
 alias up='cd ..'
 alias back='cd ~-'
 
-# This function provides a concise alternative to xrandr.
-function xr {
-  local output="${1:-hdmi}"
-  local position="${2:-mirror}"
-  local mode="${3:-1920x1080}"
-
-  case $output in
-    dp)
-      output="DP-1";;
-    hdmi)
-      output="HDMI-2";;
-    *)
-      echo "Usage: xr [hdmi|dp] [left|right|above|below|mirror|off] [res]"
-      return;;
-  esac
-
-  case $position in
-    left | right)
-      position="$position-of";;
-    above | below)
-      ;;
-    mirror | same)
-      position="same-as";;
-    off)
-      local cmd="xrandr --output $output --$position"
-      echo $cmd
-      eval $cmd
-      return;;
-    *)
-      echo "Usage: xr [hdmi|dp] [left|right|above|below|mirror|off] [res]"
-      return;;
-  esac
-
-  local cmd="xrandr --output $output --$position eDP-1 --mode $mode"
-  echo $cmd
-  eval $cmd
-}
-
 # zoxide init
 eval "$(zoxide init bash)"
 
