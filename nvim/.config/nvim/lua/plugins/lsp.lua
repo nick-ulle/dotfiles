@@ -1,47 +1,3 @@
-local config_lspconfig = function()
-  local lsp = require("lspconfig")
-
-  -- Lua
-  lsp.lua_ls.setup {}
-
-  -- R
-  lsp.r_language_server.setup {
-    settings = {
-      r = {
-        lsp = {
-          diagnostics = false
-        }
-      }
-    }
-  }
-
-  -- Python
-  lsp.pylsp.setup {
-    settings = {
-      pylsp = {
-        plugins = {
-          pycodestyle = {
-            ignore = {
-              "E203", -- whitespace before `:` (and also `,`?)
-              "E251", -- spaces around parameter equals
-              "W503", -- line break before binary operator
-            }
-          }
-        }
-      }
-    }
-  }
-
-  -- Julia
-  lsp.julials.setup {}
-
-  -- Bash
-  lsp.bashls.setup {}
-
-  -- JSON
-  lsp.jsonls.setup {}
-end
-
 return {
   {
     "jmbuhr/otter.nvim",
@@ -93,14 +49,6 @@ return {
         "pylsp",
         "r_language_server",
       },
-      automatic_enable = false,
     }
-  },
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "mason-org/mason-lspconfig.nvim",
-    },
-    config = config_lspconfig
   },
 }

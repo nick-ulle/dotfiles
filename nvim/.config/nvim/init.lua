@@ -5,6 +5,7 @@ require("options")
 require("aesthetics")
 require("keymaps")
 require("autocmds")
+require("lsp")
 
 local has = function(x)
   return vim.fn.has(x) == 1
