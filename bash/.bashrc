@@ -57,7 +57,9 @@ alias vim='nvim'
 # This alias makes python use the IPython debugger.
 alias pdb="PYTHONBREAKPOINT='IPython.core.debugger.set_trace' python"
 alias jn='jupyter notebook'
-alias jl='jupyter lab'
+alias jl='jupyter lab --custom-css'
+alias jt-pair="jupytext --set-formats 'ipynb,md'"
+alias jt-sync="jupytext --sync"
 
 alias r='R --quiet --no-save'
 alias rbuild='R CMD build'
