@@ -139,3 +139,5 @@ function xr {
 # zoxide init
 eval "$(zoxide init bash)"
 
+# Pixi autocompletion
+eval "$(pixi completion --shell bash)"
