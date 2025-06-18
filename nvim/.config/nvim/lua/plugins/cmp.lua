@@ -45,6 +45,7 @@ local sources = {
   buffer   = { icon = "Ω" },
   path     = { icon = "…" },
   tmux     = { icon = "𝕋" },
+  otter    = { icon = "O" },
 }
 
 return {
@@ -60,6 +61,7 @@ return {
       "dcampos/nvim-snippy",
       "dcampos/cmp-snippy",
       "andersevenrud/cmp-tmux",
+      -- "jmbuhr/otter.nvim",
     },
     config = function()
       local cmp = require("cmp")
@@ -131,6 +133,7 @@ return {
         },
         sources = {
           { name = "nvim_lsp" },
+          -- { name = "otter" },
           { name = "snippy" },
           { name = "buffer" },
           { name = "tmux",
