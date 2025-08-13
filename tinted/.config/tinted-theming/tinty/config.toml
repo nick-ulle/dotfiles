@@ -1,0 +1,8 @@
+default-scheme = "base16-catppuccin-frappe"
+
+[[items]]
+name = "tinted-shell"
+path = "https://github.com/tinted-theming/tinted-shell"
+themes-dir = "scripts"
+hook = "source \"$TINTY_THEME_FILE_PATH\""
+supported-systems = ["base16", "base24"]
