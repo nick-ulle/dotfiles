@@ -4,4 +4,5 @@ if status is-interactive
     pixi completion --shell fish | source
     zoxide init fish | source
     starship init fish | source
+    tinty init
 end
