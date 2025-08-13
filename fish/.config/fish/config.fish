@@ -5,6 +5,7 @@ if status is-interactive
     abbr -a df df --human-readable --exclude-type tmpfs
     abbr -a du du --human-readable --max-depth 1
     abbr -a fd fd --no-ignore
+    abbr -a o open
     abbr -a px pixi run
     abbr -a r R --quiet --no-save
     abbr -a trim "sd ' +\$' ''"
