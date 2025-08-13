@@ -50,6 +50,7 @@ config =  {
     cursor_bg = "#ca9ee6",
     cursor_border = "#8caaee",
   },
+  color_scheme = "catppuccin-frappe",
 }
 
 return config
