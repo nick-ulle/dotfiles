@@ -1,4 +1,4 @@
-function py
+function py --wraps python
   if set --query PIXI_ENVIRONMENT_NAME
     # Running in a Pixi environment.
     python $argv
