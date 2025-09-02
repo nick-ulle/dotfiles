@@ -38,6 +38,8 @@
 # Print a file's authors.
 	authors = shortlog --numbered --summary --
 	permission-reset = !git diff -p -R --no-ext-diff --no-color | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply
+# List aliases.
+  aliases = config --get-regexp ^alias
 
 [filter "lfs"]
 	required = true
