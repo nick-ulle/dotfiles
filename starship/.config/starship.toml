@@ -35,4 +35,4 @@ disabled = true
 disabled = false
 format = "[$indicator]($style)"
 fish_indicator = "🐟 "
-bash_indicator = ""
+bash_indicator = "🏏 "
