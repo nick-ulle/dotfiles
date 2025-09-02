@@ -6,3 +6,10 @@ path = "https://github.com/tinted-theming/tinted-shell"
 themes-dir = "scripts"
 hook = "source \"$TINTY_THEME_FILE_PATH\""
 supported-systems = ["base16", "base24"]
+
+[[items]]
+name = "tinted-fzf"
+path = "https://github.com/tinted-theming/tinted-fzf"
+themes-dir = "fish"
+hook = "fish -c \"source $TINTY_THEME_FILE_PATH\""
+supported-systems = ["base16", "base24"]
