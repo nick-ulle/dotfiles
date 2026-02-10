@@ -9,6 +9,8 @@ if status is-interactive
     abbr -a px pixi run
     abbr -a r R --quiet --no-save
     abbr -a trim "sd ' +\$' ''"
+    abbr -a mount-ntfs \
+      "sudo mount --options loop,uid=nick,gid=nick,fmask=0133,dmask=0022 --types ntfs3"
 
     abbr -a --position anywhere \
       -- --help '--help | bat --plain --language help'
