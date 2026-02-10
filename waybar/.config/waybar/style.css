@@ -1,0 +1,57 @@
+* {
+  font-family: HackNerdFont;
+  font-size: 14px;
+  color: #fff;
+}
+
+label.module {
+  padding: 0 1em;
+}
+
+window#waybar {
+  background-color: alpha(#282828, 0.66);
+}
+
+button {
+  box-shadow: inset 0 -3px transparent;
+  border: none;
+  border-radius: 0;
+}
+
+button.hover {
+  background: inherit;
+  box-shadow: inset 0 -3px transparent;
+}
+
+#workspaces button {
+  background-color: transparent;
+  padding: 0 0.5em;
+}
+
+#window, #workspaces {
+  margin: 0 1em;
+}
+
+#custom-terminal, #custom-browser, #custom-audio {
+  padding: 0 0.5em;
+}
+
+#network.disconnected {
+  background-color: alpha(#6666ea, 0.53);
+}
+
+#battery {
+  background-color: alpha(#f22c40, 0.53);
+}
+
+#battery.plugged, #battery.charging, #battery.full {
+  background-color: transparent;
+}
+
+#wireplumber {
+  background-color: alpha(#5ab738, 0.53);
+}
+
+#wireplumber.muted {
+  background-color: transparent;
+}
