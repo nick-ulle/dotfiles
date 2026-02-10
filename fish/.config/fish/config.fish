@@ -13,6 +13,8 @@ if status is-interactive
     abbr -a --position anywhere \
       -- --help '--help | bat --plain --language help'
 
+    abbr -a sudo sudo-rs
+
     # Initializations.
     atuin init fish --disable-up-arrow | source
     pixi completion --shell fish | source
