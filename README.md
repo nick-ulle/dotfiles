@@ -1,7 +1,7 @@
 # Dotfiles
 
 These are the dotfiles @nick-ulle uses with Arch Linux on his Asus Zenbook
-UX303.
+UX303 and Asus Zenbook Duo UX8406.
 
 ## Usage
 
