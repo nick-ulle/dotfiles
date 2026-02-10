@@ -1,0 +1,56 @@
+
+output eDP-1 {
+    mode 2880x1800@120.000
+    # logical size 1600x1000
+    scale 1.8
+    transform normal
+    position 0,0
+}
+
+output eDP-2 {
+    mode 2880x1800@120.000
+    # logical size 1600x1000
+    scale 1.8
+    transform normal
+    position 0,1000
+}
+
+# Home monitor
+output "Dell Inc. DELL U2720Q 9N9NW13" {
+    mode 3840x2160@59.997
+    # logical size 1779x1000
+    scale 2.16
+    transform normal
+    position 1600,0
+    alias $HOME
+}
+
+# DataLab desk monitor
+output "Dell Inc. DELL P2715Q 54KKD79C936L" {
+    mode 3840x2160@30.000
+    # logical size 1779x1000
+    scale 2.16
+    transform normal
+    position 1600,0
+    alias $DATALAB
+}
+
+
+profile default {
+    output eDP-1 enable
+    output eDP-2 disable
+}
+
+
+profile home {
+    output eDP-1 disable
+    output eDP-2 disable
+    output $HOME enable
+}
+
+
+profile datalab {
+    output eDP-1 disable
+    output eDP-2 disable
+    output $DATALAB enable
+}
