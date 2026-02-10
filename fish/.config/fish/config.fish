@@ -17,7 +17,10 @@ if status is-interactive
     atuin init fish --disable-up-arrow | source
     pixi completion --shell fish | source
     zoxide init fish | source
-    starship init fish | source
-    batman --export-env | source
-    tinty init
+
+    if is-pseudoterminal
+      starship init fish | source
+      batman --export-env | source
+      tinty init
+    end
 end
