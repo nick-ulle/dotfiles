@@ -1,0 +1,77 @@
+input {
+    keyboard {
+        xkb {
+            // You can set rules, model, layout, variant and options.
+            // For more information, see xkeyboard-config(7).
+
+            // For example:
+            // layout "us,ru"
+            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+
+            // If this section is empty, niri will fetch xkb settings
+            // from org.freedesktop.locale1. You can control these using
+            // localectl set-x11-keymap.
+        }
+
+        // Enable numlock on startup, omitting this setting disables it.
+        numlock
+    }
+}
+
+binds {
+    // Volume keys for PipeWire & WirePlumber.
+    XF86AudioMute allow-when-locked=true {
+      spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+    }
+    XF86AudioLowerVolume allow-when-locked=true {
+      spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-";
+    }
+    XF86AudioRaiseVolume allow-when-locked=true {
+      spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%+ -l 1.0";
+    }
+
+    XF86MonBrightnessDown allow-when-locked=true {
+      spawn-sh "brightnessctl --device intel_backlight set 10%-";
+    }
+    XF86MonBrightnessUp allow-when-locked=true {
+      spawn-sh "brightnessctl --device intel_backlight set +10%";
+    }
+
+    XF86AudioMicMute allow-when-locked=true {
+      spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+    }
+
+    // FIXME: Temporary keys until keyboard is supported.
+    Mod+F1 allow-when-locked=true {
+      spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+    }
+    Mod+F2 allow-when-locked=true {
+      spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-";
+    }
+    Mod+F3 allow-when-locked=true {
+      spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%+ -l 1.0";
+    }
+
+    // TODO: F4 keyboard backlight
+
+    Mod+F5 allow-when-locked=true {
+      spawn-sh "brightnessctl --device intel_backlight set 10%-";
+    }
+    Mod+F6 allow-when-locked=true {
+      spawn-sh "brightnessctl --device intel_backlight set +10%";
+    }
+
+    // TODO: F7 extended display mode
+    // TODO: F8 swap displays
+
+    Mod+F9 allow-when-locked=true {
+      spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+    }
+
+    // TODO: F10 Bluetooth toggle
+    // TODO: F11 emoji picker
+
+    Mod+F12 allow-when-locked=true {
+      spawn-sh "fish -c duo-toggle";
+    }
+}

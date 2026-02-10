@@ -1,0 +1,15 @@
+workspace "zoom" {
+    open-on-output "eDP-1"
+}
+
+workspace "slack" {
+    open-on-output "DP-1"
+}
+
+workspace "calendar" {
+    open-on-output "DP-1"
+}
+
+workspace "browser" {
+    open-on-output "DP-1"
+}

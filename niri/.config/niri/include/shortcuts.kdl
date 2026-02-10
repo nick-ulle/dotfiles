@@ -1,0 +1,38 @@
+// Shortcuts to launch applications and control the system.
+
+binds {
+    Mod+r repeat=false {
+      spawn "bemenu-run" "--bottom" "--prompt" " " \
+      "--tf" "#FFFFFF" "--tb" "#6666EAFF" \
+      "--ff" "#FFFFFF" "--fb" "#1B1918FF" \
+      "--nf" "#888888" "--nb" "#1B1918FF" \
+      "--af" "#888888" "--ab" "#1B1918FF" \
+      "--hf" "#FFFFFF" "--hb" "#6666EAFF" \
+      "--fn" "Hack Nerd Font" "12" "--ch" "19" \
+      "--line-height" "32" "--hp" "16" "#" "horizontal" "padding";
+    }
+
+    // Open a terminal.
+    Mod+c { spawn-sh "wezterm start -- fish -i -c tmux"; }
+    Mod+Shift+c { spawn-sh "wezterm start -- fish -i"; }
+
+    // Open a web browser.
+    Mod+n repeat=false { spawn "firefox"; }
+    Mod+Shift+n repeat=false { spawn "chromium"; }
+
+    // Open a file browser.
+    Mod+f { spawn "nemo"; }
+
+    // Open Slack.
+    Mod+s repeat=false { spawn "slack"; }
+
+    // Open a screen-mirroring window.
+    Mod+p repeat=false {
+      spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)";
+    }
+
+    // Open Zoom.
+    Mod+z repeat=false {
+      spawn-sh "chromium --app=https://app.zoom.us./wc/home";
+    }
+}
