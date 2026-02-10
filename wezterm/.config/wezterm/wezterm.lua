@@ -2,7 +2,8 @@ local wt = require("wezterm")
 
 config =  {
   font = wt.font("Hack Nerd Font"),
-  font_size = 13.3,
+  font_size = 11,
+  -- font_size = 13.3,
   -- font_size = 20,
   -- font_size = 22,
   -- font_size = 28,
