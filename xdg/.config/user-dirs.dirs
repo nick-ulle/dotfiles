@@ -5,11 +5,17 @@
 # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
 # absolute path. No other format is supported.
 #
-XDG_DESKTOP_DIR="$HOME/garden/desktop"
-XDG_DOWNLOAD_DIR="$HOME/market"
-XDG_TEMPLATES_DIR="$HOME/garden/templates"
-XDG_PUBLICSHARE_DIR="$HOME/market"
-XDG_DOCUMENTS_DIR="$HOME/archive"
-XDG_MUSIC_DIR="$HOME/"
-XDG_PICTURES_DIR="$HOME/"
-XDG_VIDEOS_DIR="$HOME/"
+XDG_DESKTOP_DIR="$HOME/hearth/desktop"
+XDG_DOWNLOAD_DIR="$HOME/wharf"
+XDG_TEMPLATES_DIR="$HOME/orchard/templates"
+XDG_PUBLICSHARE_DIR="$HOME/pasture"
+XDG_DOCUMENTS_DIR="$HOME/hearth/documents"
+XDG_MUSIC_DIR="$HOME/hearth/audio"
+XDG_PICTURES_DIR="$HOME/hearth/images"
+XDG_VIDEOS_DIR="$HOME/hearth/videos"
+
+# foundry -- work projects, etc.
+# hearth -- images, music, videos
+# orchard -- system settings
+# pasture -- temporary space to put unsorted files
+# wharf -- downloads
