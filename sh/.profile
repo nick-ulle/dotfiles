@@ -1,8 +1,9 @@
 #
 # .profile
 #
-# This file is executed on TTY login to any shell. By default, bash skips this
-# file if .bash_profile is found.
+# This file is executed on TTY login to any shell.
+#
+# By default, bash skips this file if .bash_profile is found.
 
 
 # Exit early if this script already ran.
@@ -22,15 +23,15 @@ export PATH
 PATH="${HOME}/.local/bin:${PATH}"
 
 # Add the binaries directory to the path.
-PATH="${HOME}/garden/bin:${PATH}"
+PATH="${HOME}/orchard/bin:${PATH}"
 
 # Add Ruby Gems to the path.
-PATH="${XDG_CONFIG_HOME}/ruby/gems/bin:${PATH}"
+# PATH="${XDG_CONFIG_HOME}/ruby/gems/bin:${PATH}"
 
 # Add TeXLive to the path.
-PATH="/usr/local/texlive/2021/bin/x86_64-linux:${PATH}"
-export MANPATH="/usr/local/texlive/2021/texmf-dist/doc/man:${MANPATH}"
-export INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:${INFOPATH}"
+# PATH="/usr/local/texlive/2021/bin/x86_64-linux:${PATH}"
+# export MANPATH="/usr/local/texlive/2021/texmf-dist/doc/man:${MANPATH}"
+# export INFOPATH="/usr/local/texlive/2021/texmf-dist/doc/info:${INFOPATH}"
 
 # Add Cargo to the path.
 PATH="${HOME}/.cargo/bin:${PATH}"
@@ -84,13 +85,11 @@ export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
 export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
 
 
-# Gnome Keyring
-# =============
-# Only run if in desktop session and not already running.
-if [ -n "$DESKTOP_SESSION" ] && ! [ -n "$SSH_AUTH_SOCK" ];then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
-fi
+# SSH Agent
+# =========
+# Together with the systemd user-level ssh-agent.service, this takes care of
+# running the SSH agent.
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
 
 # Other Settings
@@ -100,9 +99,9 @@ export EDITOR=nvim
 export DIFFPROG="nvim -d"
 
 # Set GTK3 and QT5 high DPI scaling.
-#export GDK_SCALE=2
-#export GDK_DPI_SCALE=0.5
-#export QT_DEVICE_PIXEL_RATIO=2
+# export GDK_SCALE=2
+export GDK_DPI_SCALE=0.825
+# export QT_DEVICE_PIXEL_RATIO=2
 
 # Make Java AWT behave in bspwm.
-export _JAVA_AWT_WM_NONREPARENTING=1
+# export _JAVA_AWT_WM_NONREPARENTING=1
