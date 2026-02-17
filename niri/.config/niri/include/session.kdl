@@ -1,3 +1,10 @@
+environment {
+    // GDK_SCALE "2"
+    GDK_DPI_SCALE "0.825"
+    // QT_DEVICE_PIXEL_RATIO "2"
+}
+
+
 binds {
     Mod+Escape { spawn "loginctl" "lock-session"; }
     Mod+Shift+Escape { spawn "systemctl" "suspend"; }
